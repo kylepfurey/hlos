@@ -13,7 +13,7 @@ set INTERMEDIATE=obj\x86
 if not exist "%BUILD%" mkdir "%BUILD%"
 if not exist "%INTERMEDIATE%" mkdir "%INTERMEDIATE%"
 
-:: Compile boot.asm
+:: Assemble boot.asm
 "%APPDATA%\..\Local\bin\NASM\nasm.exe" -f bin "boot\boot.asm" -o "%BUILD%\boot.bin"
 
 :: Compile kernel.c and other scripts
@@ -23,10 +23,10 @@ if not exist "%INTERMEDIATE%" mkdir "%INTERMEDIATE%"
 "%PROGRAMFILES%\i686-elf-tools-windows\bin\i686-elf-gcc.exe" -ffreestanding -m32 -c "kernel\random.c" -o "%INTERMEDIATE%\random.o"
 "%PROGRAMFILES%\i686-elf-tools-windows\bin\i686-elf-gcc.exe" -ffreestanding -m32 -c "kernel\kernel.c" -o "%INTERMEDIATE%\kernel.o"
 
-:: Export compiled kernel as kernel.elf using linker.ld script
+:: Link compiled kernel as kernel.elf
 "%PROGRAMFILES%\i686-elf-tools-windows\bin\i686-elf-ld.exe" -T "boot\linker.ld" -o "%INTERMEDIATE%\kernel.elf" "%INTERMEDIATE%\init.o" "%INTERMEDIATE%\print.o" "%INTERMEDIATE%\sleep.o" "%INTERMEDIATE%\random.o" "%INTERMEDIATE%\kernel.o"
 
-:: Copy kernel.elf into binary kernel.bin
+:: Convert kernel.elf into binary
 "%PROGRAMFILES%\i686-elf-tools-windows\bin\i686-elf-objcopy.exe" -O binary "%INTERMEDIATE%\kernel.elf" "%BUILD%\kernel.bin"
 
 :: Log the size of boot and kernel binaries

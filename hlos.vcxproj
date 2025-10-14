@@ -14,12 +14,16 @@
     <ClCompile Include="kernel\init.c" />
     <ClCompile Include="kernel\kernel.c" />
     <ClCompile Include="kernel\print.c" />
+    <ClCompile Include="kernel\random.c" />
+    <ClCompile Include="kernel\sleep.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="kernel\extern.h" />
     <ClInclude Include="kernel\hlos.h" />
     <ClInclude Include="kernel\init.h" />
     <ClInclude Include="kernel\print.h" />
+    <ClInclude Include="kernel\random.h" />
+    <ClInclude Include="kernel\sleep.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
@@ -65,8 +69,12 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <PostBuildEvent>
-      <Command>boot.bat</Command>
+      <Command>
+      </Command>
     </PostBuildEvent>
+    <PreBuildEvent>
+      <Command>boot.bat</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
