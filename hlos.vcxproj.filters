@@ -22,13 +22,38 @@
     <Filter Include="Source Files\boot">
       <UniqueIdentifier>{7d7dbedc-929c-45fe-9e09-f529737494d2}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\boot">
-      <UniqueIdentifier>{a3370c79-e34a-4f3d-9e4e-983f47eb07cf}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="boot\boot.asm">
       <Filter>Source Files\boot</Filter>
     </None>
+    <None Include="boot\linker.ld">
+      <Filter>Source Files\boot</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="kernel\kernel.c">
+      <Filter>Source Files\kernel</Filter>
+    </ClCompile>
+    <ClCompile Include="kernel\print.c">
+      <Filter>Source Files\kernel</Filter>
+    </ClCompile>
+    <ClCompile Include="kernel\init.c">
+      <Filter>Source Files\kernel</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="kernel\print.h">
+      <Filter>Header Files\kernel</Filter>
+    </ClInclude>
+    <ClInclude Include="kernel\hlos.h">
+      <Filter>Header Files\kernel</Filter>
+    </ClInclude>
+    <ClInclude Include="kernel\extern.h">
+      <Filter>Header Files\kernel</Filter>
+    </ClInclude>
+    <ClInclude Include="kernel\init.h">
+      <Filter>Header Files\kernel</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
