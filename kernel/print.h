@@ -5,7 +5,7 @@
 #ifndef HLOS_PRINT_H
 #define HLOS_PRINT_H
 
-#include "string.h"
+#include "types.h"
 
 /** Video Graphics Array sizes. */
 typedef enum VGA_size {
@@ -40,14 +40,14 @@ typedef enum VGA_color {
 /** Represents a single character in the Video Graphics Array. */
 typedef struct VGA_char {
 	/** The value of this character. */
-	char character;
+	char_t character;
 
 	/**
 	 * The foreground and background color of this character.
 	 * The low 4 bits represent the foreground color.
 	 * The high 4 bits represent the background color.
 	 */
-	uint8_t color;
+	byte_t color;
 } VGA_char_t;
 
 /** Data for the state of the Video Graphics Array. */
@@ -56,13 +56,13 @@ typedef struct VGA {
 	volatile VGA_char_t* const array;
 
 	/** The current column of the Video Graphics Array. */
-	uint8_t column;
+	byte_t column;
 
 	/** The current row of the Video Graphics Array. */
-	uint8_t row;
+	byte_t row;
 
 	/** The current color of the Video Graphics Array. */
-	uint8_t color;
+	byte_t color;
 } VGA_t;
 
 /** The Video Graphics Array. */
@@ -72,10 +72,10 @@ extern VGA_t VGA;
 void print(string_t msg);
 
 /** Prints a character to the Video Graphics Array. */
-void printchar(const char c);
+void printchar(const char_t c);
 
 /** Prints an integer to the Video Graphics Array. */
-void printint(const int32_t num);
+void printint(const long_t num);
 
 /** Clears the Video Graphics Array. */
 void clear();
@@ -87,6 +87,6 @@ void color(const VGA_color_t fg, const VGA_color_t bg);
  * Sets the current column and row of the Video Graphics Array.
  * Returns the character at that position.
  */
-char pos(const uint8_t col, const uint8_t row);
+char_t pos(const byte_t col, const byte_t row);
 
 #endif // HLOS_PRINT_H

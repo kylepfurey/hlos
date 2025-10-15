@@ -5,8 +5,8 @@
 #include "string.h"
 
 /** Returns the length of a string. */
-uint32_t strlen(const string_t str) {
-	uint32_t length = 0;
+ulong_t strlen(const string_t str) {
+	ulong_t length = 0;
 	while (str[length] != '\0') {
 		++length;
 	}
@@ -18,7 +18,7 @@ uint32_t strlen(const string_t str) {
  * <num> is set to the integer if <str> represents a valid integer.
  * Returns whether the string was successfully converted.
  */
-bool strint(const string_t str, int32_t* const num) {
+bool_t strint(const string_t str, long_t* const num) {
 	// TODO
 	return false;
 }
@@ -27,8 +27,8 @@ bool strint(const string_t str, int32_t* const num) {
  * Converts a integer into a string.
  * The returned string is reused for all conversions.
  */
-string_t intstr(const int32_t num) {
-	static char buffer[12] = { 0 }; // Longest string: -2147483648\0
+string_t intstr(const long_t num) {
+	static char_t buffer[12] = { 0 }; // Longest string: -2147483648\0
 	// TODO
 	return buffer;
 }

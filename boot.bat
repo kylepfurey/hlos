@@ -27,7 +27,7 @@ set COMPILE="%PROGRAMFILES%\i686-elf-tools-windows\bin\i686-elf-gcc.exe" -ffrees
 %COMPILE% -c "kernel\file.c" -o "%INTERMEDIATE%\file.o"
 %COMPILE% -c "kernel\malloc.c" -o "%INTERMEDIATE%\malloc.o"
 %COMPILE% -c "kernel\sleep.c" -o "%INTERMEDIATE%\sleep.o"
-%COMPILE% -c "kernel\random.c" -o "%INTERMEDIATE%\random.o"
+%COMPILE% -c "kernel\rand.c" -o "%INTERMEDIATE%\rand.o"
 %COMPILE% -c "kernel\beep.c" -o "%INTERMEDIATE%\beep.o"
 %COMPILE% -c "kernel\socket.c" -o "%INTERMEDIATE%\socket.o"
 
@@ -42,7 +42,7 @@ set COMPILE="%PROGRAMFILES%\i686-elf-tools-windows\bin\i686-elf-gcc.exe" -ffrees
 	"%INTERMEDIATE%\file.o"^
 	"%INTERMEDIATE%\malloc.o"^
 	"%INTERMEDIATE%\sleep.o"^
-	"%INTERMEDIATE%\random.o"^
+	"%INTERMEDIATE%\rand.o"^
 	"%INTERMEDIATE%\beep.o"^
 	"%INTERMEDIATE%\socket.o"
 

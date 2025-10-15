@@ -44,10 +44,28 @@
     <ClCompile Include="kernel\sleep.c">
       <Filter>Source Files\kernel</Filter>
     </ClCompile>
-    <ClCompile Include="kernel\random.c">
+    <ClCompile Include="kernel\rand.c">
       <Filter>Source Files\kernel</Filter>
     </ClCompile>
     <ClCompile Include="kernel\lib.c">
+      <Filter>Source Files\kernel</Filter>
+    </ClCompile>
+    <ClCompile Include="kernel\beep.c">
+      <Filter>Source Files\kernel</Filter>
+    </ClCompile>
+    <ClCompile Include="kernel\file.c">
+      <Filter>Source Files\kernel</Filter>
+    </ClCompile>
+    <ClCompile Include="kernel\malloc.c">
+      <Filter>Source Files\kernel</Filter>
+    </ClCompile>
+    <ClCompile Include="kernel\read.c">
+      <Filter>Source Files\kernel</Filter>
+    </ClCompile>
+    <ClCompile Include="kernel\socket.c">
+      <Filter>Source Files\kernel</Filter>
+    </ClCompile>
+    <ClCompile Include="kernel\string.c">
       <Filter>Source Files\kernel</Filter>
     </ClCompile>
   </ItemGroup>
@@ -67,13 +85,34 @@
     <ClInclude Include="kernel\sleep.h">
       <Filter>Header Files\kernel</Filter>
     </ClInclude>
-    <ClInclude Include="kernel\random.h">
+    <ClInclude Include="kernel\rand.h">
       <Filter>Header Files\kernel</Filter>
     </ClInclude>
     <ClInclude Include="kernel\lib.h">
       <Filter>Header Files\kernel</Filter>
     </ClInclude>
     <ClInclude Include="kernel\buffer.h">
+      <Filter>Header Files\kernel</Filter>
+    </ClInclude>
+    <ClInclude Include="kernel\beep.h">
+      <Filter>Header Files\kernel</Filter>
+    </ClInclude>
+    <ClInclude Include="kernel\file.h">
+      <Filter>Header Files\kernel</Filter>
+    </ClInclude>
+    <ClInclude Include="kernel\malloc.h">
+      <Filter>Header Files\kernel</Filter>
+    </ClInclude>
+    <ClInclude Include="kernel\read.h">
+      <Filter>Header Files\kernel</Filter>
+    </ClInclude>
+    <ClInclude Include="kernel\socket.h">
+      <Filter>Header Files\kernel</Filter>
+    </ClInclude>
+    <ClInclude Include="kernel\string.h">
+      <Filter>Header Files\kernel</Filter>
+    </ClInclude>
+    <ClInclude Include="kernel\types.h">
       <Filter>Header Files\kernel</Filter>
     </ClInclude>
   </ItemGroup>

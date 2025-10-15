@@ -6,6 +6,7 @@
 #define HLOS_H
 
 #include "extern.h"
+#include "types.h"
 #include "string.h"
 #include "lib.h"
 #include "buffer.h"
@@ -15,7 +16,7 @@
 #include "file.h"
 #include "malloc.h"
 #include "sleep.h"
-#include "random.h"
+#include "rand.h"
 #include "beep.h"
 #include "socket.h"
 

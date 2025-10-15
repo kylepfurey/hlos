@@ -19,7 +19,7 @@
     <ClCompile Include="kernel\malloc.c" />
     <ClCompile Include="kernel\socket.c" />
     <ClCompile Include="kernel\print.c" />
-    <ClCompile Include="kernel\random.c" />
+    <ClCompile Include="kernel\rand.c" />
     <ClCompile Include="kernel\read.c" />
     <ClCompile Include="kernel\sleep.c" />
     <ClCompile Include="kernel\string.c" />
@@ -35,10 +35,11 @@
     <ClInclude Include="kernel\malloc.h" />
     <ClInclude Include="kernel\socket.h" />
     <ClInclude Include="kernel\print.h" />
-    <ClInclude Include="kernel\random.h" />
+    <ClInclude Include="kernel\rand.h" />
     <ClInclude Include="kernel\read.h" />
     <ClInclude Include="kernel\sleep.h" />
     <ClInclude Include="kernel\string.h" />
+    <ClInclude Include="kernel\types.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>

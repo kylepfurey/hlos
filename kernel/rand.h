@@ -2,18 +2,18 @@
 // OS Random Number Functions
 // by Kyle Furey
 
-#ifndef HLOS_RANDOM_H
-#define HLOS_RANDOM_H
+#ifndef HLOS_RAND_H
+#define HLOS_RAND_H
 
-#include "extern.h"
+#include "types.h"
 
 /** The seed for random number generation. */
-extern uint32_t seed;
+extern ulong_t seed;
 
 /** Returns a pseudo-randomly generated number. */
-uint32_t rand();
+ulong_t rand();
 
 /** Returns a pseudo-randomly generated number within the given range. */
-uint32_t randrange(const uint32_t min, const uint32_t max);
+ulong_t randrange(const ulong_t min, const ulong_t max);
 
-#endif // HLOS_RANDOM_H
+#endif // HLOS_RAND_H

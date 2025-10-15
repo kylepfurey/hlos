@@ -5,7 +5,6 @@
 #ifndef HLOS_EXTERN_H
 #define HLOS_EXTERN_H
 
-// C STANDARD LIBRARY
 #include <stddef.h>
 #include <stdint.h>
 #include <stdbool.h>

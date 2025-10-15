@@ -3,16 +3,17 @@
 // by Kyle Furey
 
 #include "read.h"
+#include "string.h"
 
 /** Reads an input string from the user. */
 string_t read() {
-	static char buffer[MAX_STRING_LEN] = { 0 };
+	static char_t buffer[MAX_STRING_LEN] = { 0 };
 	// TODO
 	return buffer;
 }
 
 /** Reads a single character from the user. */
-char readchar() {
+char_t readchar() {
 	// TOOD
 	return 0;
 }
@@ -22,6 +23,6 @@ char readchar() {
  * If the user inputted a valid number, <num> is set to it.
  * Returns whether the read was successful.
  */
-bool readint(int32_t* const num) {
+bool_t readint(long_t* const num) {
 	return strint(read(), num);
 }

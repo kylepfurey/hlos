@@ -31,7 +31,7 @@ void kernel_main() {
 	color(VGA_COLOR_WHITE, VGA_COLOR_BLACK);
 
 	welcome = " High-Level Operating System!";
-	const uint32_t length = strlen(welcome);
+	const ulong_t length = strlen(welcome);
 	const VGA_color_t rainbow[] = {
 		VGA_COLOR_LIGHT_RED,
 		VGA_COLOR_LIGHT_BLUE,
@@ -42,14 +42,14 @@ void kernel_main() {
 		VGA_COLOR_BROWN,
 		VGA_COLOR_RED,
 	};
-	const uint32_t size = ARRAY_SIZE(rainbow, VGA_color_t);
-	uint32_t index = (uint32_t)-1;
+	const ulong_t size = ARRAY_SIZE(rainbow, VGA_color_t);
+	ulong_t index = (ulong_t)-1;
 	sleep(750);
 	print("\n\n\t\t\tYaay!");
 	VGA.row -= 2;
 	while (true) {
-		for (uint32_t i = 0; i < length; i++) {
-			const char character = pos(i, VGA.row);
+		for (ulong_t i = 0; i < length; i++) {
+			const char_t character = pos(i, VGA.row);
 			color(rainbow[(index + i) % size], VGA_COLOR_BLACK);
 			printchar(character);
 			sleep(1);

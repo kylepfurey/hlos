@@ -3,6 +3,7 @@
 // by Kyle Furey
 
 #include "print.h"
+#include "string.h"
 
 /** The Video Graphics Array. */
 VGA_t VGA = {
@@ -26,7 +27,7 @@ void print(string_t msg) {
 			print("    ");
 		}
 		else {
-			const uint16_t i = VGA.row * VGA_WIDTH + VGA.column;
+			const uint_t i = VGA.row * VGA_WIDTH + VGA.column;
 			VGA.array[i].character = *msg;
 			VGA.array[i].color = VGA.color;
 			++VGA.column;
@@ -43,20 +44,20 @@ void print(string_t msg) {
 }
 
 /** Prints a character to the Video Graphics Array. */
-void printchar(const char c) {
-	static char buffer[2] = { 0 };
+void printchar(const char_t c) {
+	static char_t buffer[2] = { 0 };
 	*buffer = c;
 	print(buffer);
 }
 
 /** Prints an integer to the Video Graphics Array. */
-void printint(const int32_t num) {
+void printint(const long_t num) {
 	print(intstr(num));
 }
 
 /** Clears the Video Graphics Array. */
 void clear() {
-	for (uint16_t i = 0; i < VGA_SIZE; ++i) {
+	for (uint_t i = 0; i < VGA_SIZE; ++i) {
 		VGA.array[i].character = ' ';
 		VGA.array[i].color = VGA.color;
 	}
@@ -73,7 +74,7 @@ void color(const VGA_color_t fg, const VGA_color_t bg) {
  * Sets the current column and row of the Video Graphics Array.
  * Returns the character at that position.
  */
-char pos(const uint8_t col, const uint8_t row) {
+char_t pos(const byte_t col, const byte_t row) {
 	VGA.column = col % VGA_WIDTH;
 	VGA.row = row % VGA_HEIGHT;
 	return VGA.array[VGA.row * VGA_WIDTH + VGA.column].character;
