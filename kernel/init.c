@@ -6,7 +6,6 @@
 
 /** Initializes the kernel. */
 void init() {
-	// Zero out .bss
 	uint8_t* bss = &__bss_start;
 	while (bss < &__bss_end) {
 		*bss++ = 0;

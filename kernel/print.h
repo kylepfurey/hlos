@@ -71,6 +71,9 @@ extern VGA_t VGA;
 /** Returns the length of a string. */
 uint32_t len(const char* const str);
 
+/** Returns the number of elements in an array. */
+#define size(array, type) (sizeof(array) / sizeof(type))
+
 /** Prints a message to the Video Graphics Array. */
 void print(const char* msg);
 

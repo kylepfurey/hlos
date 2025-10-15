@@ -7,10 +7,13 @@
 
 #include "extern.h"
 
-/** A counter the BIOS increments approximately every 55 milliseconds. */
-extern volatile const uint32_t* const BIOS_ticks;
+/** Multiply this number by a number of milliseconds to estimate the time in CPU cycles. */
+#define MS_TO_CYCLES (600000)
+
+/** Multiply this number by a number of CPU cycles to estimate the time in milliseconds. */
+#define CYCLES_TO_MS (1.0 / MS_TO_CYCLES)
 
 /** Pauses the OS for about the given number of milliseconds. */
-void sleep(const uint32_t ms);
+void sleep(uint32_t ms);
 
 #endif // HLOS_SLEEP_H

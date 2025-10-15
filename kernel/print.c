@@ -32,6 +32,9 @@ void print(const char* msg) {
 		else if (*msg == '\r') {
 			VGA.column = 0;
 		}
+		else if (*msg == '\t') {
+			print("    ");
+		}
 		else {
 			const uint16_t i = VGA.row * VGA_WIDTH + VGA.column;
 			VGA.array[i].character = *msg;

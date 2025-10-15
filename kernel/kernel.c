@@ -10,31 +10,51 @@ void kernel_main() {
 
 	sleep(1000);
 	clear();
+	print("\n\t\t");
 	color(VGA_COLOR_WHITE, VGA_COLOR_BLACK);
-	const char* welcome = "Welcome to the\n";
+	const char* welcome = "Welcome to the\n\n";
+	sleep(1000);
 	while (*welcome != '\0') {
 		printchar(*welcome++);
-		sleep(100);
+		sleep(75);
 	}
-	color(VGA_COLOR_LIGHT_RED, VGA_COLOR_BLACK);
-	sleep(500);
-	print("High");
-	sleep(500);
+
+	color(VGA_COLOR_BROWN, VGA_COLOR_BLACK);
+	sleep(300);
+	print(" High");
+	sleep(300);
 	print("-Level ");
-	sleep(500);
+	sleep(300);
 	print("Operating ");
-	sleep(500);
-	print("System");
+	sleep(300);
+	print("System!");
 	color(VGA_COLOR_WHITE, VGA_COLOR_BLACK);
-	print("!");
-	welcome = "High-Level Operating System!";
-	uint32_t length = len(welcome);
-	sleep(1000);
+
+	welcome = " High-Level Operating System!";
+	const uint32_t length = len(welcome);
+	const VGA_color_t rainbow[] = {
+		VGA_COLOR_LIGHT_RED,
+		VGA_COLOR_LIGHT_BLUE,
+		VGA_COLOR_LIGHT_CYAN,
+		VGA_COLOR_LIGHT_GREEN,
+		VGA_COLOR_LIGHT_MAGENTA,
+		VGA_COLOR_YELLOW,
+		VGA_COLOR_BROWN,
+		VGA_COLOR_RED,
+	};
+	const uint32_t size = size(rainbow, VGA_color_t);
+	uint32_t index = (uint32_t)-1;
+	sleep(750);
+	print("\n\n\t\t\tYaay!");
+	VGA.row -= 2;
 	while (true) {
-		const char character = pos(randrange(0, length + 1), VGA.row);
-		color(randrange(0, VGA_COLOR_WHITE + 1), VGA_COLOR_BLACK);
-		printchar(character);
-		sleep(100);
+		for (uint32_t i = 0; i < length; i++) {
+			const char character = pos(i, VGA.row);
+			color(rainbow[(index + i) % size], VGA_COLOR_BLACK);
+			printchar(character);
+			sleep(1);
+		}
+		--index;
 	}
 
 	pause();
