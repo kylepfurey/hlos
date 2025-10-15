@@ -1,5 +1,5 @@
 // .c
-// OS Initialization Functions
+// OS Initialization Function
 // by Kyle Furey
 
 #include "init.h"
@@ -10,9 +10,4 @@ void init() {
 	while (bss < &__bss_end) {
 		*bss++ = 0;
 	}
-}
-
-/** Halts the kernel. */
-void pause() {
-	while (true);
 }

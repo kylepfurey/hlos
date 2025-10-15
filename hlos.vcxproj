@@ -19,6 +19,7 @@
     <ClCompile Include="kernel\sleep.c" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="kernel\buffer.h" />
     <ClInclude Include="kernel\extern.h" />
     <ClInclude Include="kernel\hlos.h" />
     <ClInclude Include="kernel\init.h" />

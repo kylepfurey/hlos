@@ -73,5 +73,8 @@
     <ClInclude Include="kernel\lib.h">
       <Filter>Header Files\kernel</Filter>
     </ClInclude>
+    <ClInclude Include="kernel\buffer.h">
+      <Filter>Header Files\kernel</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

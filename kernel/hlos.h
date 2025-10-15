@@ -7,6 +7,7 @@
 
 #include "extern.h"
 #include "lib.h"
+#include "buffer.h"
 #include "init.h"
 #include "print.h"
 #include "sleep.h"

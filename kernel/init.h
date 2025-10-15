@@ -1,5 +1,5 @@
 // .h
-// OS Initialization Functions
+// OS Initialization Function
 // by Kyle Furey
 
 #ifndef HLOS_INIT_H
@@ -21,8 +21,5 @@ extern uint8_t __bss_end;
 
 /** Initializes the kernel. */
 void init();
-
-/** Halts the kernel. */
-void pause();
 
 #endif // HLOS_INIT_H

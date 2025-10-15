@@ -13,4 +13,10 @@
 /** Returns the length of a string. */
 uint32_t len(const char* const str);
 
+/** Halts the kernel. */
+void pause();
+
+/** Crashes the kernel with an error if the given condition is false. */
+void assert(const bool cond, const char* const err);
+
 #endif // HLOS_LIB_H
