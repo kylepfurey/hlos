@@ -45,6 +45,7 @@ load_kernel:
 	mov ds, ax						; Clear data segment
 	mov si, msg_boot				; Load string into source index
 	call print16					; Print boot message
+	call hi_professor				; Print message for professor
 	jmp enable_a20					; Enable A20 line
 
 
@@ -79,6 +80,15 @@ print16:
 	ret								; Exit function
 
 
+; Prints a message for the professor
+hi_professor:
+	xor ax, ax						; Clear accumulator
+	mov ds, ax						; Clear data segment
+	mov si, msg_professor			; Load string into source index
+	call print16					; Print professor message
+	ret								; Exit function
+
+
 ; Enables the A20 line
 enable_a20:
 	in al, 0x92						; Read from control port A
@@ -96,6 +106,11 @@ msg_error:
 pause:
 	hlt								; Halt CPU
 	jmp pause						; Infinitely loop
+
+
+; Disk error message string
+msg_professor:
+	db 0x0D, 0x0A, 'Hello Professor Sindhu!', 0x0D, 0x0A, 0x0
 
 
 ; Enters 32-bit protected mode
