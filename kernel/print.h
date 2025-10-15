@@ -1,11 +1,11 @@
 // .h
-// OS Print Functions
+// OS Printing Functions
 // by Kyle Furey
 
 #ifndef HLOS_PRINT_H
 #define HLOS_PRINT_H
 
-#include "extern.h"
+#include "string.h"
 
 /** Video Graphics Array sizes. */
 typedef enum VGA_size {
@@ -63,19 +63,19 @@ typedef struct VGA {
 
 	/** The current color of the Video Graphics Array. */
 	uint8_t color;
-
-	/** Padding for alignment. */
-	uint8_t padding;
 } VGA_t;
 
 /** The Video Graphics Array. */
 extern VGA_t VGA;
 
 /** Prints a message to the Video Graphics Array. */
-void print(const char* msg);
+void print(string_t msg);
 
 /** Prints a character to the Video Graphics Array. */
 void printchar(const char c);
+
+/** Prints an integer to the Video Graphics Array. */
+void printint(const int32_t num);
 
 /** Clears the Video Graphics Array. */
 void clear();

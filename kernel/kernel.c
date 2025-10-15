@@ -12,7 +12,7 @@ void kernel_main() {
 	clear();
 	print("\n\t\t");
 	color(VGA_COLOR_WHITE, VGA_COLOR_BLACK);
-	const char* welcome = "Welcome to the\n\n";
+	string_t welcome = "Welcome to the\n\n";
 	sleep(1000);
 	while (*welcome != '\0') {
 		printchar(*welcome++);
@@ -31,7 +31,7 @@ void kernel_main() {
 	color(VGA_COLOR_WHITE, VGA_COLOR_BLACK);
 
 	welcome = " High-Level Operating System!";
-	const uint32_t length = len(welcome);
+	const uint32_t length = strlen(welcome);
 	const VGA_color_t rainbow[] = {
 		VGA_COLOR_LIGHT_RED,
 		VGA_COLOR_LIGHT_BLUE,

@@ -1,5 +1,5 @@
 // .c
-// OS Print Functions
+// OS Printing Functions
 // by Kyle Furey
 
 #include "print.h"
@@ -10,11 +10,10 @@ VGA_t VGA = {
 	0,
 	0,
 	VGA_COLOR(VGA_COLOR_LIGHT_GRAY, VGA_COLOR_BLACK),
-	0,
 };
 
 /** Prints a message to the Video Graphics Array. */
-void print(const char* msg) {
+void print(string_t msg) {
 	while (*msg != '\0') {
 		if (*msg == '\n') {
 			VGA.column = 0;
@@ -48,6 +47,11 @@ void printchar(const char c) {
 	static char buffer[2] = { 0 };
 	*buffer = c;
 	print(buffer);
+}
+
+/** Prints an integer to the Video Graphics Array. */
+void printint(const int32_t num) {
+	print(intstr(num));
 }
 
 /** Clears the Video Graphics Array. */
