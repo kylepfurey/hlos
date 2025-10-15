@@ -1,5 +1,5 @@
 // .c
-// OS Sleep Functions
+// OS Sleep Function
 // by Kyle Furey
 
 #include "sleep.h"

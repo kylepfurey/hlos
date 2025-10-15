@@ -1,5 +1,5 @@
 // .h
-// OS Sleep Functions
+// OS Sleep Function
 // by Kyle Furey
 
 #ifndef HLOS_SLEEP_H

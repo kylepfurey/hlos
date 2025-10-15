@@ -1,5 +1,5 @@
 // .c
-// OS Random Number Function
+// OS Random Number Functions
 // by Kyle Furey
 
 #include "random.h"

@@ -19,6 +19,7 @@ if not exist "%INTERMEDIATE%" mkdir "%INTERMEDIATE%"
 :: Compile kernel.c and other scripts
 set COMPILE="%PROGRAMFILES%\i686-elf-tools-windows\bin\i686-elf-gcc.exe" -ffreestanding -m32
 %COMPILE% -c "kernel\kernel.c" -o "%INTERMEDIATE%\kernel.o"
+%COMPILE% -c "kernel\lib.c" -o "%INTERMEDIATE%\lib.o"
 %COMPILE% -c "kernel\init.c" -o "%INTERMEDIATE%\init.o"
 %COMPILE% -c "kernel\print.c" -o "%INTERMEDIATE%\print.o"
 %COMPILE% -c "kernel\sleep.c" -o "%INTERMEDIATE%\sleep.o"
@@ -27,6 +28,7 @@ set COMPILE="%PROGRAMFILES%\i686-elf-tools-windows\bin\i686-elf-gcc.exe" -ffrees
 :: Link compiled kernel with linker.ld
 "%PROGRAMFILES%\i686-elf-tools-windows\bin\i686-elf-ld.exe" -T "boot\linker.ld" -o "%BUILD%\kernel.bin"^
 	"%INTERMEDIATE%\kernel.o"^
+	"%INTERMEDIATE%\lib.o"^
 	"%INTERMEDIATE%\init.o"^
 	"%INTERMEDIATE%\print.o"^
 	"%INTERMEDIATE%\sleep.o"^

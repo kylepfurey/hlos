@@ -9,18 +9,9 @@ VGA_t VGA = {
 	(volatile VGA_char_t* const)0xB8000,
 	0,
 	0,
-	(VGA_COLOR_BLACK << 4) | (VGA_COLOR_LIGHT_GRAY & 0xF),
+	VGA_COLOR(VGA_COLOR_LIGHT_GRAY, VGA_COLOR_BLACK),
 	0,
 };
-
-/** Returns the length of a string. */
-uint32_t len(const char* const str) {
-	uint32_t length = 0;
-	while (str[length] != '\0') {
-		++length;
-	}
-	return length;
-}
 
 /** Prints a message to the Video Graphics Array. */
 void print(const char* msg) {
@@ -71,7 +62,7 @@ void clear() {
 
 /** Sets the current color of the Video Graphics Array. */
 void color(const VGA_color_t fg, const VGA_color_t bg) {
-	VGA.color = (bg << 4) | (fg & 0xF);
+	VGA.color = VGA_COLOR(fg, bg);
 }
 
 /**

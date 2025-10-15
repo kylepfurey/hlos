@@ -47,6 +47,9 @@
     <ClCompile Include="kernel\random.c">
       <Filter>Source Files\kernel</Filter>
     </ClCompile>
+    <ClCompile Include="kernel\lib.c">
+      <Filter>Source Files\kernel</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="kernel\print.h">
@@ -65,6 +68,9 @@
       <Filter>Header Files\kernel</Filter>
     </ClInclude>
     <ClInclude Include="kernel\random.h">
+      <Filter>Header Files\kernel</Filter>
+    </ClInclude>
+    <ClInclude Include="kernel\lib.h">
       <Filter>Header Files\kernel</Filter>
     </ClInclude>
   </ItemGroup>

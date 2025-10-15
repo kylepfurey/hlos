@@ -34,6 +34,9 @@ typedef enum VGA_color {
 	VGA_COLOR_WHITE = 0xF,
 } VGA_color_t;
 
+/** Combines a foreground and background color for the Video Graphics Array. */
+#define VGA_COLOR(fg, bg) ((bg << 4) | (fg & 0xF))
+
 /** Represents a single character in the Video Graphics Array. */
 typedef struct VGA_char {
 	/** The value of this character. */
@@ -67,12 +70,6 @@ typedef struct VGA {
 
 /** The Video Graphics Array. */
 extern VGA_t VGA;
-
-/** Returns the length of a string. */
-uint32_t len(const char* const str);
-
-/** Returns the number of elements in an array. */
-#define size(array, type) (sizeof(array) / sizeof(type))
 
 /** Prints a message to the Video Graphics Array. */
 void print(const char* msg);

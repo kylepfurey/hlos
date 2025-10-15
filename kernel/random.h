@@ -1,5 +1,5 @@
 // .h
-// OS Random Number Function
+// OS Random Number Functions
 // by Kyle Furey
 
 #ifndef HLOS_RANDOM_H
