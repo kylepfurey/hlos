@@ -17,17 +17,20 @@ if not exist "%INTERMEDIATE%" mkdir "%INTERMEDIATE%"
 "%APPDATA%\..\Local\bin\NASM\nasm.exe" -f bin "boot\boot.asm" -o "%BUILD%\boot.bin"
 
 :: Compile kernel.c and other scripts
-"%PROGRAMFILES%\i686-elf-tools-windows\bin\i686-elf-gcc.exe" -ffreestanding -m32 -c "kernel\init.c" -o "%INTERMEDIATE%\init.o"
-"%PROGRAMFILES%\i686-elf-tools-windows\bin\i686-elf-gcc.exe" -ffreestanding -m32 -c "kernel\print.c" -o "%INTERMEDIATE%\print.o"
-"%PROGRAMFILES%\i686-elf-tools-windows\bin\i686-elf-gcc.exe" -ffreestanding -m32 -c "kernel\sleep.c" -o "%INTERMEDIATE%\sleep.o"
-"%PROGRAMFILES%\i686-elf-tools-windows\bin\i686-elf-gcc.exe" -ffreestanding -m32 -c "kernel\random.c" -o "%INTERMEDIATE%\random.o"
-"%PROGRAMFILES%\i686-elf-tools-windows\bin\i686-elf-gcc.exe" -ffreestanding -m32 -c "kernel\kernel.c" -o "%INTERMEDIATE%\kernel.o"
+set COMPILE="%PROGRAMFILES%\i686-elf-tools-windows\bin\i686-elf-gcc.exe" -ffreestanding -m32
+%COMPILE% -c "kernel\kernel.c" -o "%INTERMEDIATE%\kernel.o"
+%COMPILE% -c "kernel\init.c" -o "%INTERMEDIATE%\init.o"
+%COMPILE% -c "kernel\print.c" -o "%INTERMEDIATE%\print.o"
+%COMPILE% -c "kernel\sleep.c" -o "%INTERMEDIATE%\sleep.o"
+%COMPILE% -c "kernel\random.c" -o "%INTERMEDIATE%\random.o"
 
-:: Link compiled kernel as kernel.elf
-"%PROGRAMFILES%\i686-elf-tools-windows\bin\i686-elf-ld.exe" -T "boot\linker.ld" -o "%INTERMEDIATE%\kernel.elf" "%INTERMEDIATE%\init.o" "%INTERMEDIATE%\print.o" "%INTERMEDIATE%\sleep.o" "%INTERMEDIATE%\random.o" "%INTERMEDIATE%\kernel.o"
-
-:: Convert kernel.elf into binary
-"%PROGRAMFILES%\i686-elf-tools-windows\bin\i686-elf-objcopy.exe" -O binary "%INTERMEDIATE%\kernel.elf" "%BUILD%\kernel.bin"
+:: Link compiled kernel with linker.ld
+"%PROGRAMFILES%\i686-elf-tools-windows\bin\i686-elf-ld.exe" -T "boot\linker.ld" -o "%BUILD%\kernel.bin"^
+	"%INTERMEDIATE%\kernel.o"^
+	"%INTERMEDIATE%\init.o"^
+	"%INTERMEDIATE%\print.o"^
+	"%INTERMEDIATE%\sleep.o"^
+	"%INTERMEDIATE%\random.o"
 
 :: Log the size of boot and kernel binaries
 echo.
