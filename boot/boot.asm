@@ -108,7 +108,7 @@ pause:
 	jmp pause						; Infinitely loop
 
 
-; Disk error message string
+; Message for my professor
 msg_professor:
 	db 0x0D, 0x0A, 'Hello Professor Sindhu!', 0x0D, 0x0A, 0x0
 
