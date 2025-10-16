@@ -30,6 +30,7 @@ set COMPILE="%PROGRAMFILES%\i686-elf-tools-windows\bin\i686-elf-gcc.exe" -ffrees
 %COMPILE% -c "kernel\rand.c" -o "%INTERMEDIATE%\rand.o"
 %COMPILE% -c "kernel\beep.c" -o "%INTERMEDIATE%\beep.o"
 %COMPILE% -c "kernel\socket.c" -o "%INTERMEDIATE%\socket.o"
+%COMPILE% -c "kernel\exec.c" -o "%INTERMEDIATE%\exec.o"
 
 :: Link compiled kernel with linker.ld
 "%PROGRAMFILES%\i686-elf-tools-windows\bin\i686-elf-ld.exe" -T "boot\linker.ld" -o "%BUILD%\kernel.bin"^
@@ -44,7 +45,8 @@ set COMPILE="%PROGRAMFILES%\i686-elf-tools-windows\bin\i686-elf-gcc.exe" -ffrees
 	"%INTERMEDIATE%\sleep.o"^
 	"%INTERMEDIATE%\rand.o"^
 	"%INTERMEDIATE%\beep.o"^
-	"%INTERMEDIATE%\socket.o"
+	"%INTERMEDIATE%\socket.o"^
+	"%INTERMEDIATE%\exec.o"
 
 :: Log the size of boot and kernel binaries
 echo.

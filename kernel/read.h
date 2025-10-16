@@ -18,6 +18,6 @@ char_t readchar();
  * If the user inputted a valid number, <num> is set to it.
  * Returns whether the read was successful.
  */
-bool_t readint(long_t* const num);
+bool_t readint(int_t* num);
 
 #endif // HLOS_READ_H

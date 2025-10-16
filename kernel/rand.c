@@ -5,16 +5,16 @@
 #include "rand.h"
 
 /** The seed for random number generation. */
-ulong_t seed = 0xBADA55;
+uint_t seed = 0xBADA55;
 
 /** Returns a pseudo-randomly generated number. */
-ulong_t rand() {
-	seed = (1103515245 * seed + 12345) & 0x7fffffff;
+uint_t rand() {
+	seed = (1103515245 * seed + 12345) & 0x7fffffff; // LGC
 	return seed;
 }
 
 /** Returns a pseudo-randomly generated number within the given range. */
-ulong_t randrange(const ulong_t min, const ulong_t max) {
-	const ulong_t range = max - min;
+uint_t randrange(uint_t min, uint_t max) {
+	uint_t range = max - min;
 	return (rand() % range) + min;
 }

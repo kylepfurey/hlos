@@ -14,6 +14,6 @@
 #define CYCLES_TO_MS (1.0 / MS_TO_CYCLES)
 
 /** Pauses the OS for about the given number of milliseconds. */
-void sleep(ulong_t ms);
+void sleep(uint_t ms);
 
 #endif // HLOS_SLEEP_H

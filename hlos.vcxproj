@@ -12,6 +12,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="kernel\beep.c" />
+    <ClCompile Include="kernel\exec.c" />
     <ClCompile Include="kernel\file.c" />
     <ClCompile Include="kernel\init.c" />
     <ClCompile Include="kernel\kernel.c" />
@@ -27,6 +28,7 @@
   <ItemGroup>
     <ClInclude Include="kernel\beep.h" />
     <ClInclude Include="kernel\buffer.h" />
+    <ClInclude Include="kernel\exec.h" />
     <ClInclude Include="kernel\extern.h" />
     <ClInclude Include="kernel\file.h" />
     <ClInclude Include="kernel\hlos.h" />

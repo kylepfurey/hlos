@@ -8,12 +8,12 @@
 #include "types.h"
 
 /** The seed for random number generation. */
-extern ulong_t seed;
+extern uint_t seed;
 
 /** Returns a pseudo-randomly generated number. */
-ulong_t rand();
+uint_t rand();
 
 /** Returns a pseudo-randomly generated number within the given range. */
-ulong_t randrange(const ulong_t min, const ulong_t max);
+uint_t randrange(uint_t min, uint_t max);
 
 #endif // HLOS_RAND_H

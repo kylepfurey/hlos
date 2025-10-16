@@ -68,6 +68,9 @@
     <ClCompile Include="kernel\string.c">
       <Filter>Source Files\kernel</Filter>
     </ClCompile>
+    <ClCompile Include="kernel\exec.c">
+      <Filter>Source Files\kernel</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="kernel\print.h">
@@ -91,9 +94,6 @@
     <ClInclude Include="kernel\lib.h">
       <Filter>Header Files\kernel</Filter>
     </ClInclude>
-    <ClInclude Include="kernel\buffer.h">
-      <Filter>Header Files\kernel</Filter>
-    </ClInclude>
     <ClInclude Include="kernel\beep.h">
       <Filter>Header Files\kernel</Filter>
     </ClInclude>
@@ -113,6 +113,12 @@
       <Filter>Header Files\kernel</Filter>
     </ClInclude>
     <ClInclude Include="kernel\types.h">
+      <Filter>Header Files\kernel</Filter>
+    </ClInclude>
+    <ClInclude Include="kernel\exec.h">
+      <Filter>Header Files\kernel</Filter>
+    </ClInclude>
+    <ClInclude Include="kernel\buffer.h">
       <Filter>Header Files\kernel</Filter>
     </ClInclude>
   </ItemGroup>

@@ -11,6 +11,6 @@
 void beep();
 
 /** Beeps for the given frequency in hertz and duration in milliseconds. */
-void freq(const ulong_t hz, const ulong_t ms);
+void freq(uint_t hz, uint_t ms);
 
 #endif // HLOS_BEEP_H

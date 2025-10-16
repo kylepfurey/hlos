@@ -19,5 +19,6 @@
 #include "rand.h"
 #include "beep.h"
 #include "socket.h"
+#include "exec.h"
 
 #endif // HLOS_H

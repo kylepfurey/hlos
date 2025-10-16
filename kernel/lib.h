@@ -14,15 +14,9 @@
 void pause();
 
 /** Crashes the kernel with an error if the given condition is false. */
-void assert(const bool_t cond, const string_t err);
+void assert(bool_t cond, string_t err);
 
 /** Generates a unique hash code from the given data. */
-ulong_t hash(const void* const data, const ulong_t size);
-
-/** Returns whether the data in <left> and <right> is equal. */
-bool_t compare(const void* const left, const void* const right, const ulong_t size);
-
-/** Copies <src> into <dest> for the given size. */
-void copy(const void* const src, void* const dest, const ulong_t size);
+uint_t hash(const void* data, uint_t size);
 
 #endif // HLOS_LIB_H

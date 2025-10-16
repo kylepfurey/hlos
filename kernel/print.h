@@ -72,21 +72,21 @@ extern VGA_t VGA;
 void print(string_t msg);
 
 /** Prints a character to the Video Graphics Array. */
-void printchar(const char_t c);
+void printchar(char_t c);
 
 /** Prints an integer to the Video Graphics Array. */
-void printint(const long_t num);
+void printint(int_t num);
 
 /** Clears the Video Graphics Array. */
 void clear();
 
 /** Sets the current color of the Video Graphics Array. */
-void color(const VGA_color_t fg, const VGA_color_t bg);
+void color(VGA_color_t fg, VGA_color_t bg);
 
 /**
  * Sets the current column and row of the Video Graphics Array.
  * Returns the character at that position.
  */
-char_t pos(const byte_t col, const byte_t row);
+char_t pos(byte_t col, byte_t row);
 
 #endif // HLOS_PRINT_H

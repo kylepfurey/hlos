@@ -17,19 +17,16 @@ typedef int8_t sbyte_t;
 typedef uint8_t byte_t;
 
 /** A 16-bit signed integral number. */
-typedef int16_t int_t;
+typedef int16_t short_t;
 
 /** A 16-bit unsigned integral number. */
-typedef uint16_t uint_t;
+typedef uint16_t ushort_t;
 
 /** A 32-bit signed integral number. */
-typedef int32_t long_t;
+typedef int32_t int_t;
 
 /** A 32-bit unsigned integral number. */
-typedef uint32_t ulong_t;
-
-/** A 32-bit floating-point decimal number. */
-typedef float float_t;
+typedef uint32_t uint_t;
 
 /** An 8-bit ASCII character. */
 typedef char char_t;
