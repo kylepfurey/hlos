@@ -3,12 +3,11 @@
 // by Kyle Furey
 
 #include "string.h"
+#include "lib.h"
 
 /** Returns the length of a string. */
 uint_t strlen(string_t str) {
-	if (str == NULL) {
-		return 0;
-	}
+	assert(str != NULL, "strlen() - str was NULL!");
 	uint_t length = 0;
 	while (str[length] != '\0') {
 		++length;
@@ -22,9 +21,7 @@ uint_t strlen(string_t str) {
  * Returns whether the string was successfully converted.
  */
 bool_t strint(string_t str, int_t* num) {
-	if (str == NULL) {
-		return false;
-	}
+	assert(str != NULL, "strint() - str was NULL!");
 	// TODO
 	return false;
 }

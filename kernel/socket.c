@@ -3,6 +3,7 @@
 // by Kyle Furey
 
 #include "socket.h"
+#include "lib.h"
 
 /**
  * Attempts to connect to the given IP address and port.
@@ -10,6 +11,7 @@
  * Returns whether the connection was successful.
  */
 bool_t connect(ip_address_t ip, ushort_t port, socket_t* socket) {
+	assert(socket != NULL, "connect() - socket was NULL!");
 	// TODO
 	return false;
 }
@@ -19,6 +21,7 @@ bool_t connect(ip_address_t ip, ushort_t port, socket_t* socket) {
  * Returns whether a connection was successfully terminated.
  */
 bool_t leave(const socket_t* socket) {
+	assert(socket != NULL, "leave() - socket was NULL!");
 	// TODO
 	return false;
 }
@@ -28,6 +31,8 @@ bool_t leave(const socket_t* socket) {
  * Returns whether the data was successfully sent.
  */
 bool_t send(const socket_t* socket, const void* data, uint_t size) {
+	assert(socket != NULL, "send() - socket was NULL!");
+	assert(data != NULL, "send() - data was NULL!");
 	// TODO
 	return false;
 }
@@ -38,6 +43,7 @@ bool_t send(const socket_t* socket, const void* data, uint_t size) {
  * Returns an array of bytes of length <size>.
  */
 void* receive(const socket_t* socket, uint_t ms, uint_t* size) {
+	assert(socket != NULL, "receive() - socket was NULL!");
 	// TODO
 	return NULL;
 }

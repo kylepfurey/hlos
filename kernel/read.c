@@ -3,18 +3,18 @@
 // by Kyle Furey
 
 #include "read.h"
-#include "string.h"
+#include "lib.h"
 
 /** Reads an input string from the user. */
 string_t read() {
-	static char_t buffer[MAX_STRING_LEN] = { 0 };
+	static char_t buffer[MAX_INPUT_LEN] = { 0 };
 	// TODO
 	return buffer;
 }
 
 /** Reads a single character from the user. */
 char_t readchar() {
-	// TOOD
+	// TODO
 	return 0;
 }
 

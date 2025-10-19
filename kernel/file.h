@@ -10,7 +10,7 @@
 /** The maximum size of a file (not including the file header). */
 #define MAX_FILE_SIZE 1000000
 
-/** Indicates the entire file will read. */
+/** Indicates the entire file will be read. */
 #define ENTIRE_FILE ((uint_t)-1)
 
 /**

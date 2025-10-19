@@ -7,6 +7,9 @@
 
 #include "types.h"
 
+/** The maximum number of bytes sent and received from a socket at once. */
+#define MAX_NET_LEN 1024
+
 /** Represents a 32-bit IPv4 address. */
 typedef union ip_address {
 	/** Each byte of this IP address. */
@@ -24,9 +27,6 @@ typedef struct socket {
 	/** The port of this connection. */
 	const ushort_t port;
 } socket_t;
-
-/** The maximum number of bytes sent and received from a socket at once. */
-#define MAX_NET_SIZE 1024
 
 /**
  * Attempts to connect to the given IP address and port.

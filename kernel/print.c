@@ -3,7 +3,7 @@
 // by Kyle Furey
 
 #include "print.h"
-#include "string.h"
+#include "lib.h"
 
 /** The Video Graphics Array. */
 VGA_t VGA = {
@@ -15,9 +15,7 @@ VGA_t VGA = {
 
 /** Prints a message to the Video Graphics Array. */
 void print(string_t msg) {
-	if (msg == NULL) {
-		return;
-	}
+	assert(msg != NULL, "print() msg was NULL!");
 	while (*msg != '\0') {
 		if (*msg == '\n') {
 			VGA.column = 0;

@@ -17,6 +17,7 @@
 #include "malloc.h"
 #include "sleep.h"
 #include "rand.h"
+#include "thread.h"
 #include "beep.h"
 #include "socket.h"
 #include "exec.h"

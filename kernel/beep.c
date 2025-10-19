@@ -3,6 +3,7 @@
 // by Kyle Furey
 
 #include "beep.h"
+#include "lib.h"
 
 /** Beeps the computer. */
 void beep() {

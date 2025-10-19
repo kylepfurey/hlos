@@ -24,6 +24,7 @@
     <ClCompile Include="kernel\read.c" />
     <ClCompile Include="kernel\sleep.c" />
     <ClCompile Include="kernel\string.c" />
+    <ClCompile Include="kernel\thread.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="kernel\beep.h" />
@@ -41,6 +42,7 @@
     <ClInclude Include="kernel\read.h" />
     <ClInclude Include="kernel\sleep.h" />
     <ClInclude Include="kernel\string.h" />
+    <ClInclude Include="kernel\thread.h" />
     <ClInclude Include="kernel\types.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

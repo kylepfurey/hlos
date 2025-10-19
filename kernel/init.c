@@ -3,6 +3,7 @@
 // by Kyle Furey
 
 #include "init.h"
+#include "lib.h"
 
 /** Initializes the kernel. */
 void init() {

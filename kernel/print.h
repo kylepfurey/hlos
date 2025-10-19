@@ -5,7 +5,10 @@
 #ifndef HLOS_PRINT_H
 #define HLOS_PRINT_H
 
-#include "types.h"
+#include "string.h"
+
+/** Combines a foreground and background color for the Video Graphics Array. */
+#define VGA_COLOR(fg, bg) ((bg << 4) | (fg & 0xF))
 
 /** Video Graphics Array sizes. */
 typedef enum VGA_size {
@@ -33,9 +36,6 @@ typedef enum VGA_color {
 	VGA_COLOR_YELLOW = 0xE,
 	VGA_COLOR_WHITE = 0xF,
 } VGA_color_t;
-
-/** Combines a foreground and background color for the Video Graphics Array. */
-#define VGA_COLOR(fg, bg) ((bg << 4) | (fg & 0xF))
 
 /** Represents a single character in the Video Graphics Array. */
 typedef struct VGA_char {

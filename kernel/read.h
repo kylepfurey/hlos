@@ -5,7 +5,10 @@
 #ifndef HLOS_READ_H
 #define HLOS_READ_H
 
-#include "types.h"
+#include "string.h"
+
+/** The maximum length of a received input string. */
+#define MAX_INPUT_LEN MAX_STRING_LEN
 
 /** Reads an input string from the user. */
 string_t read();
