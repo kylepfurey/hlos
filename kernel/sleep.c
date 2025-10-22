@@ -1,5 +1,5 @@
 // .c
-// OS Sleep Function
+// OS Sleep and Time Functions
 // by Kyle Furey
 
 #include "sleep.h"
@@ -9,4 +9,10 @@
 void sleep(uint_t ms) {
 	ms *= MS_TO_CYCLES;
 	while (ms-- > 0) {}
+}
+
+/** Returns the number of ticks since the OS booted. */
+int_t time() {
+	// TODO
+	return 0;
 }

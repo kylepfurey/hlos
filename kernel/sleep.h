@@ -1,5 +1,5 @@
 // .h
-// OS Sleep Function
+// OS Sleep and Time Functions
 // by Kyle Furey
 
 #ifndef HLOS_SLEEP_H
@@ -15,5 +15,8 @@
 
 /** Pauses the OS for about the given number of milliseconds. */
 void sleep(uint_t ms);
+
+/** Returns the number of ticks since the OS booted. */
+int_t time();
 
 #endif // HLOS_SLEEP_H
