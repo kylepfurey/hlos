@@ -74,6 +74,9 @@
     <ClCompile Include="kernel\thread.c">
       <Filter>Source Files\kernel</Filter>
     </ClCompile>
+    <ClCompile Include="kernel\event.c">
+      <Filter>Source Files\kernel</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="kernel\print.h">
@@ -125,6 +128,9 @@
       <Filter>Header Files\kernel</Filter>
     </ClInclude>
     <ClInclude Include="kernel\thread.h">
+      <Filter>Header Files\kernel</Filter>
+    </ClInclude>
+    <ClInclude Include="kernel\event.h">
       <Filter>Header Files\kernel</Filter>
     </ClInclude>
   </ItemGroup>
