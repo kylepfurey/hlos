@@ -24,9 +24,7 @@ void assert(bool_t cond, string_t err) {
 
 /** Generates a unique hash code from the given data. */
 uint_t hash(const void* data, uint_t size) {
-	if (data == NULL) {
-		return 0;
-	}
+	assert(data != NULL, "hash() - data was NULL!");
 	// FNV-1a
 	byte_t* ptr = (byte_t*)data;
 	uint_t hash = 2166136261u; // FNV offset
