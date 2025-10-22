@@ -5,13 +5,13 @@
 #include "sleep.h"
 #include "lib.h"
 
-/** Pauses the OS for about the given number of milliseconds. */
+/** Pauses the kernel for about the given number of milliseconds. */
 void sleep(uint_t ms) {
 	ms *= MS_TO_CYCLES;
 	while (ms-- > 0) {}
 }
 
-/** Returns the number of ticks since the OS booted. */
+/** Returns the number of ticks since the kernel booted. */
 int_t time() {
 	// TODO
 	return 0;

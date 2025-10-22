@@ -13,10 +13,10 @@
 /** Multiply this number by a number of CPU cycles to estimate the time in milliseconds. */
 #define CYCLES_TO_MS (1.0 / MS_TO_CYCLES)
 
-/** Pauses the OS for about the given number of milliseconds. */
+/** Pauses the kernel for about the given number of milliseconds. */
 void sleep(uint_t ms);
 
-/** Returns the number of ticks since the OS booted. */
+/** Returns the number of ticks since the kernel booted. */
 int_t time();
 
 #endif // HLOS_SLEEP_H
