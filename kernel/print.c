@@ -15,7 +15,7 @@ VGA_t VGA = {
 
 /** Prints a message to the Video Graphics Array. */
 void print(string_t msg) {
-	assert(msg != NULL, "print() msg was NULL!");
+	assert(msg != NULL, "print() - msg was NULL!");
 	while (*msg != '\0') {
 		if (*msg == '\n') {
 			VGA.column = 0;
