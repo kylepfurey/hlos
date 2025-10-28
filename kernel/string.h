@@ -5,10 +5,17 @@
 #ifndef HLOS_STRING_H
 #define HLOS_STRING_H
 
-#include "lib.h"
+#include "types.h"
 
 /** The maximum length of a string buffer (including the null-terminator). */
 #define MAX_STRING_LEN 1028
+
+/** An enumeration of different comparison results. */
+typedef enum comparison {
+	LESS_THAN = -1,
+	EQUAL_TO = 0,
+	GREATER_THAN = 1
+} comparison_t;
 
 /** Returns whether the given character is a letter. */
 bool_t isletter(char_t c);

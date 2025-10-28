@@ -5,20 +5,13 @@
 #ifndef HLOS_LIB_H
 #define HLOS_LIB_H
 
-#include "types.h"
+#include "string.h"
 
 /** Returns the number of elements in an array. */
 #define ARRAY_SIZE(array, type) (sizeof(array) / sizeof(type))
 
 /** An indicator that a value was not found. */
 #define NOT_FOUND ((uint_t)-1)
-
-/** An enumeration of different comparison results. */
-typedef enum comparison {
-	LESS_THAN = -1,
-	EQUAL_TO = 0,
-	GREATER_THAN = 1
-} comparison_t;
 
 /** Halts the kernel. */
 void pause();
