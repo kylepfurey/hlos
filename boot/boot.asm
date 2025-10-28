@@ -33,7 +33,7 @@ init_stack16:
 ; Loads the kernel from disk
 load_kernel:
 	mov ah, 0x2						; Set BIOS read sectors function
-	mov al, 0x7						; Set number of sectors (kernel size / 512 rounded up)
+	mov al, 11						; Set number of sectors (kernel size / 512 rounded up)
 	mov ch, 0x0						; Set cylinder 0
 	mov cl, 0x2						; Set sector after bootloader
 	mov dh, 0x0						; Set head 0
@@ -69,8 +69,8 @@ print16:
 	push ax							; Push accumulator into the stack
 .loop:
 	lodsb							; Load the next character into the lower byte of accumulator
-	or al, al						; Check for null terminator character
-	jz .exit						; Exit if null terminator character
+	or al, al						; Check for null-terminator character
+	jz .exit						; Exit if null-terminator character
 	mov ah, 0x0E					; Set BIOS teletype function
 	int 0x10						; Print character with a BIOS interrupt
 	jmp .loop						; Loop

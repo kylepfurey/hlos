@@ -5,13 +5,83 @@
 #ifndef HLOS_STRING_H
 #define HLOS_STRING_H
 
-#include "types.h"
+#include "lib.h"
 
-/** The maximum length of a string (including the null terminator). */
+/** The maximum length of a string buffer (including the null-terminator). */
 #define MAX_STRING_LEN 1028
+
+/** Returns whether the given character is a letter. */
+bool_t isletter(char_t c);
+
+/** Returns whether the given character is a number. */
+bool_t isnumber(char_t c);
+
+/** Returns whether the given character is whitespace. */
+bool_t isspace(char_t c);
+
+/** Returns whether the given character is an uppercase letter. */
+bool_t isupper(char_t c);
+
+/** Returns whether the given character is a lowercase letter. */
+bool_t islower(char_t c);
+
+/** Returns the uppercase version of the given character. */
+char_t upper(char_t c);
+
+/** Returns the lowercase version of the given character. */
+char_t lower(char_t c);
 
 /** Returns the length of a string. */
 uint_t strlen(string_t str);
+
+/** Safely copies <src> into <dest> with proper null-termination. Returns <dest>. */
+char_t* strcopy(char_t* dest, string_t src);
+
+/**
+ * Compares <left> and <right> character by character.
+ * Returns a comparison enum of <left> to <right> for the first differing character.
+ */
+comparison_t strcompare(string_t left, string_t right);
+
+/** Safely sets each character in <str> to <c>. Returns <str>. */
+char_t* strset(char_t* str, char_t c);
+
+/** Safely swaps the characters of <left> and <right> with proper null-termination. Returns <left>. */
+char_t* strswap(char_t* left, char_t* right);
+
+/** Safely reverses each character in <str>. Returns <str>. */
+char_t* strflip(char_t* str);
+
+/** Returns the index of the first character that matches <c> in <str> (or NOT_FOUND). */
+uint_t strfirst(string_t str, char_t c);
+
+/** Returns the index of to the last character that matches <c> in <str> (or NOT_FOUND). */
+uint_t strlast(string_t str, char_t c);
+
+/** Returns the first index of where <src> was found in <dest> (or NOT_FOUND). */
+uint_t strfind(string_t dest, string_t src);
+
+/** Safely appends the characters in <src> to <dest> with proper null-termination. Returns <dest>. */
+char_t* strappend(char_t* dest, string_t src);
+
+/** Safely copies <len> characters in <src> to <dest> with proper null-termination. Returns <dest>. */
+char_t* substring(char_t* dest, string_t src, uint_t len);
+
+/** Converts all characters in <str> to uppercase. Returns <str>. */
+char_t* strupper(char_t* str);
+
+/** Converts all characters in <str> to lowercase. Returns <str>. */
+char_t* strlower(char_t* str);
+
+/** Safely normalizes all characters in <str> with proper null-termination. Returns <str>. */
+char_t* strnormal(char_t* str);
+
+/**
+ * Transforms all characters in <str>. Returns <str>.
+ * <trans> is a pointer to a function that inputs the index of the current character,
+ * a pointer to the current character, and returns whether it should be reinserted.
+ */
+char_t* strtrans(char_t* str, bool_t(*trans)(uint_t, char_t*));
 
 /**
  * Converts a string into an integer if possible.
