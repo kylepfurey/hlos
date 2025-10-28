@@ -19,6 +19,15 @@ void pause();
 /** Crashes the kernel with an error if the given condition is false. */
 void assert(bool_t cond, string_t err);
 
+/** Returns the lesser number. */
+int_t min(int_t a, int_t b);
+
+/** Returns the greater number. */
+int_t max(int_t a, int_t b);
+
+/** Returns a positive version of the given number. */
+int_t abs(int_t num);
+
 /** Generates a unique hash code from the given data. */
 uint_t hash(const void* data, uint_t size);
 

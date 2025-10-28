@@ -22,6 +22,24 @@ void assert(bool_t cond, string_t err) {
 	}
 }
 
+/** Returns the lesser number. */
+int_t min(int_t a, int_t b) {
+	return a < b ? a : b;
+}
+
+/** Returns the greater number. */
+int_t max(int_t a, int_t b) {
+	return a > b ? a : b;
+}
+
+/** Returns a positive version of the given number. */
+int_t abs(int_t num) {
+	if (num >= 0) {
+		return num;
+	}
+	return -num;
+}
+
 /** Generates a unique hash code from the given data. */
 uint_t hash(const void* data, uint_t size) {
 	assert(data != NULL, "hash() - data was NULL!");

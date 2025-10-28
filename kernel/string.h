@@ -71,8 +71,14 @@ uint_t strfind(string_t dest, string_t src);
 /** Safely appends the characters in <src> to <dest> with proper null-termination. Returns <dest>. */
 char_t* strappend(char_t* dest, string_t src);
 
+/** Safely appends <c> at the end of <str> with proper null-termination. Returns <str>. */
+char_t* strpush(char_t* str, char_t c);
+
+/** Safely removes <num> characters from <str> with proper null-termination. Returns <str>. */
+char_t* strpop(char_t* str, uint_t num);
+
 /** Safely copies <len> characters in <src> to <dest> with proper null-termination. Returns <dest>. */
-char_t* substring(char_t* dest, string_t src, uint_t len);
+char_t* substr(char_t* dest, string_t src, uint_t len);
 
 /** Converts all characters in <str> to uppercase. Returns <str>. */
 char_t* strupper(char_t* str);

@@ -128,10 +128,30 @@ char_t* strappend(char_t* dest, string_t src) {
 	return dest;
 }
 
+/** Safely appends <c> at the end of <str> with proper null-termination. Returns <str>. */
+char_t* strpush(char_t* str, char_t c) {
+	assert(str != NULL, "strpush() - str was NULL!");
+	uint_t len = strlen(str);
+	str[len++] = c;
+	str[len] = '\0';
+	return str;
+}
+
+/** Safely removes <num> characters from <str> with proper null-termination. Returns <str>. */
+char_t* strpop(char_t* str, uint_t num) {
+	assert(str != NULL, "strpop() - str was NULL!");
+	uint_t len = strlen(str);
+	num = min(num, len);
+	while (num-- > 0) {
+		str[--len] = '\0';
+	}
+	return str;
+}
+
 /** Safely copies <len> characters in <src> to <dest> with proper null-termination. Returns <dest>. */
-char_t* substring(char_t* dest, string_t src, uint_t len) {
-	assert(dest != NULL, "substring() - dest was NULL!");
-	assert(src != NULL, "substring() - src was NULL!");
+char_t* substr(char_t* dest, string_t src, uint_t len) {
+	assert(dest != NULL, "substr() - dest was NULL!");
+	assert(src != NULL, "substr() - src was NULL!");
 	// TODO
 	return dest;
 }
