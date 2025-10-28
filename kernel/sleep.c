@@ -12,7 +12,7 @@ void sleep(uint_t ms) {
 }
 
 /** Returns the number of ticks since the kernel booted. */
-int_t time() {
+uint_t time() {
 	// TODO
 	return 0;
 }
