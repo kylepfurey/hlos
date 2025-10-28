@@ -10,10 +10,10 @@
 /** A true or false value. */
 typedef bool bool_t;
 
-/** A 8-bit signed integral number. */
+/** An 8-bit signed integral number. */
 typedef int8_t sbyte_t;
 
-/** A 8-bit unsigned integral number. */
+/** An 8-bit unsigned integral number. */
 typedef uint8_t byte_t;
 
 /** A 16-bit signed integral number. */
