@@ -25,7 +25,10 @@ void print(string_t msg) {
 			VGA.column = 0;
 		}
 		else if (*msg == '\t') {
-			print("    ");
+			uint_t tab = 4 - (VGA.column % 4);
+			for (uint_t i = 0; i < tab; ++i) {
+				printchar(' ');
+			}
 		}
 		else {
 			uint_t i = VGA.row * VGA_WIDTH + VGA.column;
