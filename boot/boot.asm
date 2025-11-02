@@ -112,13 +112,13 @@ protected_mode:
 	jmp 0x8:init_stack32			; Initialize 32-bit stack selectors (32-bit jump)
 
 
-; GDT descriptor structure
+; GDT Descriptor structure
 gdt_descriptor:
 	dw gdt_end - gdt_start - 1		; Size of GDT
 	dd gdt_start					; Address of GDT
 
 
-; Global descriptor table
+; Global Descriptor Table
 gdt_start:
 	dq 0x0							; Null segment
 	dq 0xCF9A000000FFFF				; Code segment
@@ -145,11 +145,11 @@ init_stack32:
 	xor ebx, ebx					; Initialize base register to 0
 	xor ecx, ecx					; Initialize counter to 0
 	xor edx, edx					; Initialize data register to 0
-	jmp enable_interrupts			; Enable IDT and interrupts
+	jmp init_interrupts				; Initialize IDT
 
 
-; Sets up the IDT and enables safe interrupt callbacks
-enable_interrupts:
+; Sets up the Interrupt Descriptor Table
+init_interrupts:
 	mov eax, ignore_interrupt		; Store address of callback in accumulator
 	mov ebx, eax					; Copy callback address into base register
 	mov ecx, 0x100					; Store number of IDT entries in counter
@@ -166,29 +166,56 @@ enable_interrupts:
 	loop .loop						; Loop until counter is 0
 .exit:
 	lidt [idt_descriptor]			; Load IDT
-	sti								; Enable interrupts
-	jmp init_floats					; Initialize floating-point operations
-
-
-; IDT descriptor structure
-idt_descriptor:
-	dw idt_end - idt_start - 1		; Size of IDT
-	dd idt_start					; Address of IDT
-
-
-; Interrupt descriptor table
-idt_start equ 0x80000				; Set IDT at 0x80000
-idt_end equ idt_start + 256*8		; Reserve 256 8-byte entries for callbacks
+	jmp remap_pic					; Remap the PIC and enable interrupts
 
 
 ; Ignores an interrupt
 ignore_interrupt:
 	pushad							; Push 32-bit registers to the stack
-	mov al, 0x20					; Store end-of-interrupt command in the first byte of the accumulator
+	mov al, 0x20					; Store the end-of-interrupt command
 	out 0xA0, al					; Send end-of-interrupt command to the slave PIC
 	out 0x20, al					; Send end-of-interrupt command to the master PIC
 	popad							; Pop 32-bit registers from the stack
 	iret							; Return from interrupt
+
+
+; IDT Descriptor structure
+idt_descriptor:
+	dw idt_end - idt_start - 1		; Size of IDT
+	dd idt_start					; Address of IDT
+
+
+; Interrupt Descriptor Table
+idt_start equ 0x80000				; Set IDT at 0x80000
+idt_end equ idt_start + 256*8		; Reserve 256 8-byte entries for callbacks
+
+
+; Remaps the Programmable Interrupt Controller to the IDT and enables interrupts
+remap_pic:
+	in al, 0x21						; Read from the master PIC's mask
+	push ax							; Push the master PIC's mask to the stack
+	in al, 0xA1						; Read from the slave PIC's mask
+	push ax							; Push the slave PIC's mask to the stack
+	mov al, 0x11					; Store the ICW1 command
+	out 0x20, al					; Send ICW1 command to the master PIC
+	out 0xA0, al					; Send ICW1 command to the slave PIC
+	mov al, 0x20					; Store the ICW2 command
+	out 0x21, al					; Send ICW2 command to the master PIC
+	mov al, 0x28					; Store the ICW2 command
+	out 0xA1, al					; Send ICW2 command to the slave PIC
+	mov al, 0x4						; Store the ICW3 command
+	out 0x21, al					; Send ICW3 command to the master PIC
+	mov al, 0x2						; Store the ICW3 command
+	out 0xA1, al					; Send ICW3 command to the slave PIC
+	mov al, 0x1						; Store the ICW4 command
+	out 0x21, al					; Send ICW4 command to the master PIC
+	out 0xA1, al					; Send ICW4 command to the slave PIC
+	pop ax							; Pop the slave PIC's mask from the stack
+	out 0xA1, al					; Write to the slave PIC's mask
+	pop ax							; Push the master PIC's mask from the stack
+	out 0x21, al					; Write to the master PIC's mask
+	sti								; Enable interrupts
+	jmp init_floats					; Initialize floating-point operations
 
 
 ; Initializes floating-point operations
