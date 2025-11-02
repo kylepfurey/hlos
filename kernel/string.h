@@ -41,6 +41,12 @@ char_t lower(char_t c);
 /** Returns the length of a string. */
 uint_t strlen(string_t str);
 
+/** Returns the length of the smaller string. */
+uint_t strmin(string_t left, string_t right);
+
+/** Generates a unique hash code from the given string. */
+uint_t strhash(string_t str);
+
 /** Safely copies <src> into <dest> with proper null-termination. Returns <dest>. */
 char_t* strcopy(char_t* dest, string_t src);
 
@@ -74,8 +80,11 @@ char_t* strappend(char_t* dest, string_t src);
 /** Safely appends <c> at the end of <str> with proper null-termination. Returns <str>. */
 char_t* strpush(char_t* str, char_t c);
 
-/** Safely removes <num> characters from <str> with proper null-termination. Returns <str>. */
+/** Safely removes <num> characters from the end of <str> with proper null-termination. Returns <str>. */
 char_t* strpop(char_t* str, uint_t num);
+
+/** Safely removes <num> characters from the front of <str> with proper null-termination. Returns <str>. */
+char_t* strpull(char_t* str, uint_t num);
 
 /** Safely copies <len> characters in <src> to <dest> with proper null-termination. Returns <dest>. */
 char_t* substr(char_t* dest, string_t src, uint_t len);
@@ -86,15 +95,8 @@ char_t* strupper(char_t* str);
 /** Converts all characters in <str> to lowercase. Returns <str>. */
 char_t* strlower(char_t* str);
 
-/** Safely normalizes all characters in <str> with proper null-termination. Returns <str>. */
+/** Safely removes leading, trailing, and duplicate whitespace characters in <str> with proper null-termination. Returns <str>. */
 char_t* strnormal(char_t* str);
-
-/**
- * Transforms all characters in <str>. Returns <str>.
- * <trans> is a pointer to a function that inputs the index of the current character,
- * a pointer to the current character, and returns whether it should be reinserted.
- */
-char_t* strtrans(char_t* str, bool_t(*trans)(uint_t, char_t*));
 
 /**
  * Converts a string into an integer if possible.
