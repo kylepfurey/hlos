@@ -60,7 +60,7 @@ disk_error:
 
 ; Boot message string
 msg_boot:
-	db 'Successfully booted HLOS.', 0x0D, 0x0A, 0x0
+	db 'Successfully booted HLOS.', 0xD, 0xA, 0x0
 
 
 ; Prints the string held in the source index register (16-bit)
@@ -71,7 +71,7 @@ print16:
 	lodsb							; Load the next character into the lower byte of accumulator
 	or al, al						; Check for null-terminator character
 	jz .exit						; Exit if null-terminator character
-	mov ah, 0x0E					; Set BIOS teletype function
+	mov ah, 0xE						; Set BIOS teletype function
 	int 0x10						; Print character with a BIOS interrupt
 	jmp .loop						; Loop
 .exit:
@@ -99,7 +99,7 @@ enable_a20:
 
 ; Disk error message string
 msg_error:
-	db 'Could not load kernel!', 0x0D, 0x0A, 0x0
+	db 'Could not load kernel!', 0xD, 0xA, 0x0
 
 
 ; Pauses execution
@@ -108,9 +108,9 @@ pause:
 	jmp pause						; Infinitely loop
 
 
-; Message for my professor
+; Message for the professor
 msg_professor:
-	db 0x0D, 0x0A, 'Hello Professor Sindhu!', 0x0D, 0x0A, 0x0
+	db 0xD, 0xA, 'Hello Professor Sindhu!', 0xD, 0xA, 0x0
 
 
 ; Enters 32-bit protected mode
@@ -119,7 +119,7 @@ protected_mode:
 	mov eax, cr0					; Read from control register 0
 	or eax, 0x1						; Enable protected mode
 	mov cr0, eax					; Write to control register 0
-	jmp 0x08:init_stack32			; Initialize 32-bit stack selectors (32-bit jump)
+	jmp 0x8:init_stack32			; Initialize 32-bit stack selectors (32-bit jump)
 
 
 ; GDT descriptor structure
@@ -151,7 +151,7 @@ init_stack32:
 	mov esp, 0x90000				; Initialize stack pointer to top
 	mov ebp, esp					; Initialize base pointer
 	cld								; Clear direction flag
-	xor eax, eax					; Initialize 32-bit accumlator to 0
+	xor eax, eax					; Initialize 32-bit accumulator to 0
 	xor ebx, ebx					; Initialize base register to 0
 	xor ecx, ecx					; Initialize counter to 0
 	xor edx, edx					; Initialize data register to 0
@@ -160,7 +160,15 @@ init_stack32:
 
 ; Initializes floating-point operations
 init_floats:
-	finit							; Initializes registers for floating-point arithmetic
+	mov eax, cr0					; Read from control register 0
+	and eax, 0xFFFFFFFB				; Disable FPU emulation mode
+	or eax, 0x22					; Handle FPU errors
+	mov cr0, eax					; Write to control register 0
+	mov eax, cr4					; Read from control register 4
+	or eax, 0x600					; Enable SSE instructions
+	mov cr4, eax					; Write to control register 4
+	fninit							; Initializes registers for floating-point arithmetic
+	xor eax, eax					; Clear accumulator
 	jmp start_kernel				; Jump to kernel entry point
 
 

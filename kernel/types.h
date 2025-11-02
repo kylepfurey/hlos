@@ -28,6 +28,9 @@ typedef int32_t int_t;
 /** A 32-bit unsigned integral number. */
 typedef uint32_t uint_t;
 
+/** A 32-bit floating-point decimal number. */
+typedef float float_t;
+
 /** An 8-bit ASCII character. */
 typedef char char_t;
 
