@@ -42,7 +42,7 @@ void kernel_main() {
 		VGA_COLOR_BROWN,
 		VGA_COLOR_RED,
 	};
-	uint_t size = ARRAY_SIZE(rainbow, VGA_color_t);
+	uint_t size = ARRAY_SIZE(rainbow);
 	uint_t index = (uint_t)-1;
 	sleep(750);
 	print("\n\n\t\t\tYaay!");
