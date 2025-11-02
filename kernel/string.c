@@ -359,8 +359,7 @@ bool_t strint(string_t str, int_t* num) {
  * The returned string is reused for all conversions.
  */
 string_t intstr(int_t num) {
-	static char_t buffer[12]; // Longest string: -2147483648\0
-	buffer[11] = '\0';
+	static char_t buffer[12] = { 0 }; // Longest string: -2147483648\0
 	char_t* current = &buffer[11];
 	bool_t positive = (num >= 0);
 	uint_t magnitude = positive ? (uint_t)num : (uint_t)(-(num + 1)) + 1;
