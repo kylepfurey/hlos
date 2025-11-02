@@ -99,6 +99,13 @@ char_t* strlower(char_t* str);
 char_t* strnormal(char_t* str);
 
 /**
+ * Transforms the given string using the given <trans> function. Returns <str>.
+ * <trans> is a function that inputs a pointer to the start of the string, a pointer to the
+ * current character, and returns whether the character should be inserted back into the string.
+ */
+char_t* strtrans(char_t* str, bool_t(*trans)(char_t*, char_t*));
+
+/**
  * Converts a string into an integer if possible.
  * <num> is set to the integer if <str> represents a valid integer.
  * Returns whether the string was successfully converted.

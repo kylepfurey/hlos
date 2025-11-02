@@ -322,6 +322,28 @@ char_t* strnormal(char_t* str) {
 }
 
 /**
+ * Transforms the given string using the given <trans> function. Returns <str>.
+ * <trans> is a function that inputs a pointer to the start of the string, a pointer to the
+ * current character, and returns whether the character should be inserted back into the string.
+ */
+char_t* strtrans(char_t* str, bool_t(*trans)(char_t*, char_t*)) {
+	assert(str != NULL, "strtrans() - str was NULL!");
+	assert(trans != NULL, "strtrans() - trans was NULL!");
+	char_t* read = str;
+	char_t* write = str;
+	while (*read != '\0') {
+		char_t* current = read;
+		if (trans(str, current)) {
+			*write = *read;
+			++write;
+		}
+		++read;
+	}
+	*write = '\0';
+	return str;
+}
+
+/**
  * Converts a string into an integer if possible.
  * <num> is set to the integer if <str> represents a valid integer.
  * Returns whether the string was successfully converted.
