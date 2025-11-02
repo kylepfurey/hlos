@@ -45,7 +45,6 @@ load_kernel:
 	mov ds, ax						; Clear data segment
 	mov si, msg_boot				; Load string into source index
 	call print16					; Print boot message
-	call hi_professor				; Print message for professor
 	jmp enable_a20					; Enable A20 line
 
 
@@ -77,15 +76,6 @@ print16:
 .exit:
 	pop ax							; Pop accumulator from the stack
 	pop si							; Pop source index from the stack 
-	ret								; Exit function
-
-
-; Prints a message for the professor
-hi_professor:
-	xor ax, ax						; Clear accumulator
-	mov ds, ax						; Clear data segment
-	mov si, msg_professor			; Load string into source index
-	call print16					; Print professor message
 	ret								; Exit function
 
 
@@ -155,7 +145,50 @@ init_stack32:
 	xor ebx, ebx					; Initialize base register to 0
 	xor ecx, ecx					; Initialize counter to 0
 	xor edx, edx					; Initialize data register to 0
+	jmp enable_interrupts			; Enable IDT and interrupts
+
+
+; Sets up the IDT and enables safe interrupt callbacks
+enable_interrupts:
+	mov eax, ignore_interrupt		; Store address of callback in accumulator
+	mov ebx, eax					; Copy callback address into base register
+	mov ecx, 0x100					; Store number of IDT entries in counter
+	mov edi, idt_start				; Store location of IDT in destination index
+.loop:
+	mov word [edi], ax				; Set address at low offset
+	mov word [edi+2], 0x8			; Set code segment selector (from GDT)
+	mov byte [edi+4], 0x0			; Set reserved byte to 0
+	mov byte [edi+5], 0x8E			; Set interrupt flags
+	shr ebx, 0x10					; Shift base register 16-bits right to to get the high offset
+	mov word [edi+6], bx			; Set address at high offset
+	mov ebx, eax					; Re-copy callback address into base register
+	add edi, 0x8					; Increment destination index by 8 bytes
+	loop .loop						; Loop until counter is 0
+.exit:
+	lidt [idt_descriptor]			; Load IDT
+	sti								; Enable interrupts
 	jmp init_floats					; Initialize floating-point operations
+
+
+; IDT descriptor structure
+idt_descriptor:
+	dw idt_end - idt_start - 1		; Size of IDT
+	dd idt_start					; Address of IDT
+
+
+; Interrupt descriptor table
+idt_start equ 0x80000				; Set IDT at 0x80000
+idt_end equ idt_start + 256*8		; Reserve 256 8-byte entries for callbacks
+
+
+; Ignores an interrupt
+ignore_interrupt:
+	pushad							; Push 32-bit registers to the stack
+	mov al, 0x20					; Store end-of-interrupt command in the first byte of the accumulator
+	out 0xA0, al					; Send end-of-interrupt command to the slave PIC
+	out 0x20, al					; Send end-of-interrupt command to the master PIC
+	popad							; Pop 32-bit registers from the stack
+	iret							; Return from interrupt
 
 
 ; Initializes floating-point operations
@@ -168,7 +201,6 @@ init_floats:
 	or eax, 0x600					; Enable SSE instructions
 	mov cr4, eax					; Write to control register 4
 	fninit							; Initializes registers for floating-point arithmetic
-	xor eax, eax					; Clear accumulator
 	jmp start_kernel				; Jump to kernel entry point
 
 
