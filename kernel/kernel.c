@@ -9,6 +9,7 @@ void kernel_main() {
 	init();
 
 	sleep(1000);
+	beep();
 	clear();
 	print("\n\t\t");
 	color(VGA_COLOR_WHITE, VGA_COLOR_BLACK);

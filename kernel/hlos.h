@@ -10,6 +10,7 @@
 #include "string.h"
 #include "lib.h"
 #include "buffer.h"
+#include "driver.h"
 #include "init.h"
 #include "print.h"
 #include "read.h"

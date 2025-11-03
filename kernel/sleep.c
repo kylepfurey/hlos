@@ -4,15 +4,32 @@
 
 #include "sleep.h"
 #include "lib.h"
+#include "driver.h"
+
+/** The number of ticks since the kernel started. */
+volatile uint_t ticks = 0;
+
+/** The number of ticks to increment each interrupt by the Programmable Interval Timer. */
+uint_t speed = 1;
 
 /** Pauses the kernel for about the given number of milliseconds. */
 void sleep(uint_t ms) {
-	ms *= MS_TO_CYCLES;
-	while (ms-- > 0) {}
+	ms += time();
+	while (time() < ms) {
+		hlt();
+	}
 }
 
-/** Returns the number of ticks since the kernel booted. */
+/** Returns the total number of milliseconds since the kernel booted. */
 uint_t time() {
-	// TODO
-	return 0;
+	uint_t ms;
+	cli();
+	ms = ticks;
+	sti();
+	return ms * PIT_TICK_MS;
+}
+
+/** Increments the kernel timer. */
+void tick() {
+	ticks += speed;
 }

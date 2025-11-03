@@ -33,7 +33,7 @@ init_stack16:
 ; Loads the kernel from disk
 load_kernel:
 	mov ah, 0x2						; Set BIOS read sectors function
-	mov al, 18						; Set number of sectors (kernel size / 512 rounded up)
+	mov al, 20						; Set number of sectors (kernel size / 512 rounded up)
 	mov ch, 0x0						; Set cylinder 0
 	mov cl, 0x2						; Set sector after bootloader
 	mov dh, 0x0						; Set head 0
@@ -176,7 +176,7 @@ ignore_interrupt:
 	out 0xA0, al					; Send end-of-interrupt command to the slave PIC
 	out 0x20, al					; Send end-of-interrupt command to the master PIC
 	popad							; Pop 32-bit registers from the stack
-	iret							; Return from interrupt
+	iret							; Exit interrupt
 
 
 ; IDT Descriptor structure

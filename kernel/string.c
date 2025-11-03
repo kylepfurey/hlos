@@ -366,7 +366,7 @@ bool_t strint(string_t str, int_t* num) {
 	int_t value = 0;
 	while (isnumber(*str)) {
 		int_t digit = *str - '0';
-		if (value > (INT32_MAX - digit) / 10) {
+		if (value > (2147483647 - digit) / 10) {
 			return false;
 		}
 		value = value * 10 + digit;

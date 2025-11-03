@@ -30,6 +30,9 @@
     <None Include="boot\linker.ld">
       <Filter>Source Files\boot</Filter>
     </None>
+    <None Include="kernel\driver.asm">
+      <Filter>Source Files\kernel</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="kernel\kernel.c">
@@ -75,6 +78,9 @@
       <Filter>Source Files\kernel</Filter>
     </ClCompile>
     <ClCompile Include="kernel\event.c">
+      <Filter>Source Files\kernel</Filter>
+    </ClCompile>
+    <ClCompile Include="kernel\driver.c">
       <Filter>Source Files\kernel</Filter>
     </ClCompile>
   </ItemGroup>
@@ -131,6 +137,9 @@
       <Filter>Header Files\kernel</Filter>
     </ClInclude>
     <ClInclude Include="kernel\event.h">
+      <Filter>Header Files\kernel</Filter>
+    </ClInclude>
+    <ClInclude Include="kernel\driver.h">
       <Filter>Header Files\kernel</Filter>
     </ClInclude>
   </ItemGroup>

@@ -9,9 +9,11 @@
   <ItemGroup>
     <None Include="boot\boot.asm" />
     <None Include="boot\linker.ld" />
+    <None Include="kernel\driver.asm" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="kernel\beep.c" />
+    <ClCompile Include="kernel\driver.c" />
     <ClCompile Include="kernel\event.c" />
     <ClCompile Include="kernel\exec.c" />
     <ClCompile Include="kernel\file.c" />
@@ -30,6 +32,7 @@
   <ItemGroup>
     <ClInclude Include="kernel\beep.h" />
     <ClInclude Include="kernel\buffer.h" />
+    <ClInclude Include="kernel\driver.h" />
     <ClInclude Include="kernel\event.h" />
     <ClInclude Include="kernel\exec.h" />
     <ClInclude Include="kernel\extern.h" />

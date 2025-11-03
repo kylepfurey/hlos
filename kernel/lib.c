@@ -3,11 +3,14 @@
 // by Kyle Furey
 
 #include "lib.h"
+#include "driver.h"
 #include "print.h"
 
 /** Halts the kernel. */
 void pause() {
-	while (true);
+	while (true) {
+		hlt();
+	}
 }
 
 /** Crashes the kernel with an error if the given condition is false. */
