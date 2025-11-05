@@ -1,9 +1,10 @@
 // .c
-// OS Hardware Driver Functions
+// OS Interrupt Callback Functions
 // by Kyle Furey
 
-#include "driver.h"
+#include "interrupt.h"
 #include "lib.h"
+#include "assembly.h"
 
 /** The Interrupt Descriptor Table. */
 IDT_t IDT = {

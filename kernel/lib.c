@@ -3,7 +3,7 @@
 // by Kyle Furey
 
 #include "lib.h"
-#include "driver.h"
+#include "assembly.h"
 #include "print.h"
 
 /** Halts the kernel. */

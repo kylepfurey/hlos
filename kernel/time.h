@@ -1,9 +1,9 @@
 // .h
-// OS Sleep and Time Functions
+// OS Time and Sleep Functions
 // by Kyle Furey
 
-#ifndef HLOS_SLEEP_H
-#define HLOS_SLEEP_H
+#ifndef HLOS_TIME_H
+#define HLOS_TIME_H
 
 #include "types.h"
 
@@ -34,13 +34,13 @@ extern volatile uint_t ticks;
 /** The number of ticks to increment each interrupt by the Programmable Interval Timer. */
 extern uint_t speed;
 
-/** Pauses the kernel for about the given number of milliseconds. */
-void sleep(uint_t ms);
-
 /** Returns the total number of milliseconds since the kernel booted. */
 uint_t time();
+
+/** Pauses the kernel for about the given number of milliseconds. */
+void sleep(uint_t ms);
 
 /** Increments the kernel timer. */
 void tick();
 
-#endif // HLOS_SLEEP_H
+#endif // HLOS_TIME_H

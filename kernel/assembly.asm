@@ -1,5 +1,5 @@
 ; .asm
-; OS Hardware Driver Functions
+; OS External Assembly Functions
 ; by Kyle Furey
 
 
@@ -57,6 +57,9 @@ out:
 	out dx, al						; Write <num> to <port>
 	pop ebp							; Pop base pointer from the stack
 	ret								; Exit function
+
+
+; INTERRUPTS
 
 
 ; The callback for the timer interrupt

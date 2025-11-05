@@ -30,7 +30,7 @@
     <None Include="boot\linker.ld">
       <Filter>Source Files\boot</Filter>
     </None>
-    <None Include="kernel\driver.asm">
+    <None Include="kernel\assembly.asm">
       <Filter>Source Files\kernel</Filter>
     </None>
   </ItemGroup>
@@ -44,10 +44,10 @@
     <ClCompile Include="kernel\init.c">
       <Filter>Source Files\kernel</Filter>
     </ClCompile>
-    <ClCompile Include="kernel\sleep.c">
+    <ClCompile Include="kernel\time.c">
       <Filter>Source Files\kernel</Filter>
     </ClCompile>
-    <ClCompile Include="kernel\rand.c">
+    <ClCompile Include="kernel\rng.c">
       <Filter>Source Files\kernel</Filter>
     </ClCompile>
     <ClCompile Include="kernel\lib.c">
@@ -80,7 +80,7 @@
     <ClCompile Include="kernel\event.c">
       <Filter>Source Files\kernel</Filter>
     </ClCompile>
-    <ClCompile Include="kernel\driver.c">
+    <ClCompile Include="kernel\interrupt.c">
       <Filter>Source Files\kernel</Filter>
     </ClCompile>
   </ItemGroup>
@@ -97,10 +97,10 @@
     <ClInclude Include="kernel\init.h">
       <Filter>Header Files\kernel</Filter>
     </ClInclude>
-    <ClInclude Include="kernel\sleep.h">
+    <ClInclude Include="kernel\time.h">
       <Filter>Header Files\kernel</Filter>
     </ClInclude>
-    <ClInclude Include="kernel\rand.h">
+    <ClInclude Include="kernel\rng.h">
       <Filter>Header Files\kernel</Filter>
     </ClInclude>
     <ClInclude Include="kernel\lib.h">
@@ -139,7 +139,10 @@
     <ClInclude Include="kernel\event.h">
       <Filter>Header Files\kernel</Filter>
     </ClInclude>
-    <ClInclude Include="kernel\driver.h">
+    <ClInclude Include="kernel\assembly.h">
+      <Filter>Header Files\kernel</Filter>
+    </ClInclude>
+    <ClInclude Include="kernel\interrupt.h">
       <Filter>Header Files\kernel</Filter>
     </ClInclude>
   </ItemGroup>

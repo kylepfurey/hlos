@@ -4,11 +4,9 @@
 
 #include "init.h"
 #include "lib.h"
-#include "driver.h"
-#include "sleep.h"
-
-/** The callback for the timer interrupt. */
-extern void timer_interrupt();
+#include "assembly.h"
+#include "interrupt.h"
+#include "time.h"
 
 /** Initializes the Programmable Interval Timer. */
 static void PIT_init() {

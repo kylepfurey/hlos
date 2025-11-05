@@ -22,15 +22,15 @@ set ASSEMBLE="%APPDATA%\..\Local\bin\NASM\nasm.exe" -f elf32
 %COMPILE%  "kernel\kernel.c" -o "%INTERMEDIATE%\kernel.o"
 %COMPILE%  "kernel\string.c" -o "%INTERMEDIATE%\string.o"
 %COMPILE%  "kernel\lib.c" -o "%INTERMEDIATE%\lib.o"
-%COMPILE%  "kernel\driver.c" -o "%INTERMEDIATE%\driver_c.o"
-%ASSEMBLE% "kernel\driver.asm" -o "%INTERMEDIATE%\driver_asm.o"
+%ASSEMBLE% "kernel\assembly.asm" -o "%INTERMEDIATE%\assembly.o"
+%COMPILE%  "kernel\interrupt.c" -o "%INTERMEDIATE%\interrupt.o"
 %COMPILE%  "kernel\init.c" -o "%INTERMEDIATE%\init.o"
 %COMPILE%  "kernel\print.c" -o "%INTERMEDIATE%\print.o"
 %COMPILE%  "kernel\read.c" -o "%INTERMEDIATE%\read.o"
+%COMPILE%  "kernel\time.c" -o "%INTERMEDIATE%\time.o"
+%COMPILE%  "kernel\rng.c" -o "%INTERMEDIATE%\rng.o"
 %COMPILE%  "kernel\file.c" -o "%INTERMEDIATE%\file.o"
 %COMPILE%  "kernel\malloc.c" -o "%INTERMEDIATE%\malloc.o"
-%COMPILE%  "kernel\sleep.c" -o "%INTERMEDIATE%\sleep.o"
-%COMPILE%  "kernel\rand.c" -o "%INTERMEDIATE%\rand.o"
 %COMPILE%  "kernel\event.c" -o "%INTERMEDIATE%\event.o"
 %COMPILE%  "kernel\thread.c" -o "%INTERMEDIATE%\thread.o"
 %COMPILE%  "kernel\beep.c" -o "%INTERMEDIATE%\beep.o"
@@ -42,15 +42,15 @@ set ASSEMBLE="%APPDATA%\..\Local\bin\NASM\nasm.exe" -f elf32
 	"%INTERMEDIATE%\kernel.o"^
 	"%INTERMEDIATE%\string.o"^
 	"%INTERMEDIATE%\lib.o"^
-	"%INTERMEDIATE%\driver_c.o"^
-	"%INTERMEDIATE%\driver_asm.o"^
+	"%INTERMEDIATE%\assembly.o"^
+	"%INTERMEDIATE%\interrupt.o"^
 	"%INTERMEDIATE%\init.o"^
 	"%INTERMEDIATE%\print.o"^
 	"%INTERMEDIATE%\read.o"^
+	"%INTERMEDIATE%\time.o"^
+	"%INTERMEDIATE%\rng.o"^
 	"%INTERMEDIATE%\file.o"^
 	"%INTERMEDIATE%\malloc.o"^
-	"%INTERMEDIATE%\sleep.o"^
-	"%INTERMEDIATE%\rand.o"^
 	"%INTERMEDIATE%\event.o"^
 	"%INTERMEDIATE%\thread.o"^
 	"%INTERMEDIATE%\beep.o"^

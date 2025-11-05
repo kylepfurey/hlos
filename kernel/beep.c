@@ -4,8 +4,8 @@
 
 #include "beep.h"
 #include "lib.h"
-#include "driver.h"
-#include "sleep.h"
+#include "assembly.h"
+#include "time.h"
 
 /** Beeps the computer. */
 void beep() {

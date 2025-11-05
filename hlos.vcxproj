@@ -9,43 +9,44 @@
   <ItemGroup>
     <None Include="boot\boot.asm" />
     <None Include="boot\linker.ld" />
-    <None Include="kernel\driver.asm" />
+    <None Include="kernel\assembly.asm" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="kernel\beep.c" />
-    <ClCompile Include="kernel\driver.c" />
     <ClCompile Include="kernel\event.c" />
     <ClCompile Include="kernel\exec.c" />
     <ClCompile Include="kernel\file.c" />
     <ClCompile Include="kernel\init.c" />
+    <ClCompile Include="kernel\interrupt.c" />
     <ClCompile Include="kernel\kernel.c" />
     <ClCompile Include="kernel\lib.c" />
     <ClCompile Include="kernel\malloc.c" />
     <ClCompile Include="kernel\socket.c" />
     <ClCompile Include="kernel\print.c" />
-    <ClCompile Include="kernel\rand.c" />
+    <ClCompile Include="kernel\rng.c" />
     <ClCompile Include="kernel\read.c" />
-    <ClCompile Include="kernel\sleep.c" />
+    <ClCompile Include="kernel\time.c" />
     <ClCompile Include="kernel\string.c" />
     <ClCompile Include="kernel\thread.c" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="kernel\assembly.h" />
     <ClInclude Include="kernel\beep.h" />
     <ClInclude Include="kernel\buffer.h" />
-    <ClInclude Include="kernel\driver.h" />
     <ClInclude Include="kernel\event.h" />
     <ClInclude Include="kernel\exec.h" />
     <ClInclude Include="kernel\extern.h" />
     <ClInclude Include="kernel\file.h" />
     <ClInclude Include="kernel\hlos.h" />
     <ClInclude Include="kernel\init.h" />
+    <ClInclude Include="kernel\interrupt.h" />
     <ClInclude Include="kernel\lib.h" />
     <ClInclude Include="kernel\malloc.h" />
     <ClInclude Include="kernel\socket.h" />
     <ClInclude Include="kernel\print.h" />
-    <ClInclude Include="kernel\rand.h" />
+    <ClInclude Include="kernel\rng.h" />
     <ClInclude Include="kernel\read.h" />
-    <ClInclude Include="kernel\sleep.h" />
+    <ClInclude Include="kernel\time.h" />
     <ClInclude Include="kernel\string.h" />
     <ClInclude Include="kernel\thread.h" />
     <ClInclude Include="kernel\types.h" />

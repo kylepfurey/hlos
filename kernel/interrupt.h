@@ -1,9 +1,9 @@
 // .h
-// OS Hardware Driver Functions
+// OS Interrupt Callback Functions
 // by Kyle Furey
 
-#ifndef HLOS_DRIVER_H
-#define HLOS_DRIVER_H
+#ifndef HLOS_INTERRUPT_H
+#define HLOS_INTERRUPT_H
 
 #include "types.h"
 
@@ -119,21 +119,6 @@ typedef struct IDT {
 /** The Interrupt Descriptor Table. */
 extern IDT_t IDT;
 
-/** Pauses the CPU. */
-extern void hlt();
-
-/** Disables external interrupts. */
-extern void cli();
-
-/** Enables external interrupts. */
-extern void sti();
-
-/** Reads a byte from the given IO port. */
-extern byte_t in(ushort_t port);
-
-/** Writes a byte to the given IO port. */
-extern void out(ushort_t port, byte_t num);
-
 /** Enables hardware with the given Interrupt Request mask. */
 void IRQ_enable(IRQ_mask_t mask);
 
@@ -143,4 +128,4 @@ void IRQ_disable(IRQ_mask_t mask);
 /** Sets and returns an entry in the Interrupt Descriptor Table. */
 volatile IDT_entry_t* IDT_bind(PIC_entry_t index, void* callback, ushort_t selector, IDT_flags_t flags);
 
-#endif // HLOS_DRIVER_H
+#endif // HLOS_INTERRUPT_H
