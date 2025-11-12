@@ -5,7 +5,7 @@
 #include "read.h"
 #include "lib.h"
 #include "assembly.h"
-#include "print.h"
+#include "time.h"
 
 /** A mapping of each scancode to a keyboard character. */
 const char_t SCANCHAR[SCANCODE_COUNT] = {
@@ -40,16 +40,82 @@ const char_t SCANSHIFT[SCANCODE_COUNT] = {
 /** The state of the user's keyboard. */
 volatile keyboard_t keyboard = {0};
 
-/** Reads an input string from the user. */
+/**
+ * Reads an input string from the user.
+ * The returned string is reused for all conversions.
+ */
 string_t read() {
     static char_t buffer[MAX_INPUT_LEN] = {0};
-    // TODO
+    char_t *current = buffer;
+    char_t *end = buffer;
+    key_state_t key;
+    char_t c;
+    ushort_t size = 0;
+    byte_t startcol = VGA.column;
+    byte_t startrow = VGA.row;
+    uint_t fliptime = time() + 500;
+    bool_t flipped = false;
+    while (true) {
+        if (scan(&key, &c)) {
+            if (c != '\0') {
+                ushort_t app;
+                if (c == '\t') {
+                    app = TAB_WIDTH - (VGA.column % TAB_WIDTH);
+                } else if (c == '\n') {
+                    app = VGA_WIDTH - VGA.column;
+                } else {
+                    app = 1;
+                }
+                if (size + app >= VGA_SIZE &&
+                    (c != '\n' || (key.flags & KEY_FLAGS_SHIFT) != 0)) {
+                    continue;
+                }
+                size += app;
+                copy(current + 1, current, end - current);
+                *current++ = c;
+                ++end;
+                if (flipped) {
+                    flipped = false;
+                    byte_t fg = VGA.color & 15;
+                    byte_t bg = (VGA.color >> 4) & 15;
+                    VGA.color = VGA_COLOR(bg, fg);
+                    VGA.array[VGA.column + VGA.row * VGA_WIDTH].color = VGA.color;
+                }
+                VGA.column = startcol;
+                VGA.row = startrow;
+                if ((startcol + startrow * VGA_WIDTH) + size >= VGA_SIZE) {
+                    startcol = 0;
+                    startrow = 0;
+                    clear();
+                }
+                print(buffer);
+                if (c == '\n' && (key.flags & KEY_FLAGS_SHIFT) == 0) {
+                    --end;
+                    break;
+                }
+            } else if (key.code == SCANCODE_BACKSPACE) {
+                if (current == buffer) {
+                    continue;
+                }
+                // TODO
+            }
+        }
+        if (time() > fliptime) {
+            byte_t fg = VGA.color & 15;
+            byte_t bg = (VGA.color >> 4) & 15;
+            VGA.color = VGA_COLOR(bg, fg);
+            VGA.array[VGA.column + VGA.row * VGA_WIDTH].color = VGA.color;
+            flipped = !flipped;
+            fliptime = time() + 500;
+        }
+    }
+    *end = '\0';
     return buffer;
 }
 
 /** Reads a single character from the user. */
 char_t readchar() {
-    char_t c = '\0';
+    char_t c;
     while (true) {
         if (scan(NULL, &c) && c != '\0') {
             break;
@@ -101,6 +167,8 @@ bool_t scan(key_state_t *key, char_t *c) {
             } else if ((state->flags & KEY_FLAGS_SHIFT) != 0) {
                 *c = SCANSHIFT[state->code];
             }
+        } else {
+            *c = '\0';
         }
     }
     sti();

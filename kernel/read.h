@@ -5,7 +5,7 @@
 #ifndef HLOS_READ_H
 #define HLOS_READ_H
 
-#include "string.h"
+#include "print.h"
 
 /** Keyboard data port. */
 #define KEYBOARD_DATA_PORT 0x60
@@ -13,8 +13,8 @@
 /** Keyboard status port. */
 #define KEYBOARD_STATUS_PORT 0x64
 
-/** The maximum length of a received input string. */
-#define MAX_INPUT_LEN MAX_STRING_LEN
+/** The maximum length of a received input string (including the null terminator). */
+#define MAX_INPUT_LEN VGA_SIZE
 
 /** The number of key states in the circular keyboard queue. */
 #define MAX_KEY_STATES 16
@@ -172,7 +172,10 @@ extern const char_t SCANSHIFT[SCANCODE_COUNT];
 /** The current state of the user's keyboard. */
 extern volatile keyboard_t keyboard;
 
-/** Reads an input string from the user. */
+/**
+ * Reads an input string from the user.
+ * The returned string is reused for all conversions.
+ */
 string_t read();
 
 /** Reads a single character from the user. */

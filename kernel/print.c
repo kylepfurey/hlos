@@ -23,8 +23,8 @@ void print(string_t msg) {
         } else if (*msg == '\r') {
             VGA.column = 0;
         } else if (*msg == '\t') {
-            uint_t tab = 4 - (VGA.column % 4);
-            for (uint_t i = 0; i < tab; ++i) {
+            byte_t tab = TAB_WIDTH - (VGA.column % TAB_WIDTH);
+            for (byte_t i = 0; i < tab; ++i) {
                 printchar(' ');
             }
         } else {

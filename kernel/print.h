@@ -10,6 +10,9 @@
 /** Combines a foreground and background color for the Video Graphics Array. */
 #define VGA_COLOR(fg, bg) ((bg << 4) | (fg & 0xF))
 
+/** The number of spaces that equal one \t tab. */
+#define TAB_WIDTH 4
+
 /** Video Graphics Array sizes. */
 typedef enum VGA_size {
     VGA_WIDTH = 80,
