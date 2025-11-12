@@ -124,6 +124,7 @@ typedef enum scancode {
     SCANCODE_DELETE = 0x8E,
     SCANCODE_KEYPAD_ENTER = 0x8F,
     SCANCODE_RELEASED = 0x80,
+    SCANCODE_REMAPPED = 0x81,
     SCANCODE_EXTENDED = 0xE0,
     SCANCODE_EXTENDED2 = 0xE1,
     SCANCODE_COUNT = 128,
@@ -183,6 +184,13 @@ char_t readchar();
  * Returns whether the read was successful.
  */
 bool_t readint(int_t *num);
+
+/**
+ * Checks for keyboard input. Returns whether any new input has occurred.
+ * <key> will be set to the latest keyboard input.
+ * <c> will be set to the keyboard's corresponding character (or \0 if none).
+ */
+bool_t scan(key_state_t *key, char_t *c);
 
 /** Updates the state of the keyboard. */
 void key();

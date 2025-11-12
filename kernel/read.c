@@ -9,8 +9,8 @@
 
 /** A mapping of each scancode to a keyboard character. */
 const char_t SCANCHAR[SCANCODE_COUNT] = {
-    '\0', '\e', '1', '2', '3', '4', '5', '6',
-    '7', '8', '9', '0', '-', '=', '\b', '\t',
+    '\0', '\0', '1', '2', '3', '4', '5', '6',
+    '7', '8', '9', '0', '-', '=', '\0', '\t',
     'q', 'w', 'e', 'r', 't', 'y', 'u', 'i',
     'o', 'p', '[', ']', '\n', '\0', 'a', 's',
     'd', 'f', 'g', 'h', 'j', 'k', 'l', ';',
@@ -24,8 +24,8 @@ const char_t SCANCHAR[SCANCODE_COUNT] = {
 
 /** A mapping of each scancode to a shifted keyboard character. */
 const char_t SCANSHIFT[SCANCODE_COUNT] = {
-    '\0', '\e', '!', '@', '#', '$', '%', '^',
-    '&', '*', '(', ')', '_', '+', '\b', '\t',
+    '\0', '\0', '!', '@', '#', '$', '%', '^',
+    '&', '*', '(', ')', '_', '+', '\0', '\t',
     'Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I',
     'O', 'P', '{', '}', '\n', '\0', 'A', 'S',
     'D', 'F', 'G', 'H', 'J', 'K', 'L', ':',
@@ -49,7 +49,14 @@ string_t read() {
 
 /** Reads a single character from the user. */
 char_t readchar() {
-    // TODO
+    char_t c = '\0';
+    while (true) {
+        if (scan(NULL, &c) && c != '\0') {
+            break;
+        }
+    }
+    printchar(c);
+    return c;
 }
 
 /**
@@ -59,6 +66,45 @@ char_t readchar() {
  */
 bool_t readint(int_t *num) {
     return strint(read(), num);
+}
+
+/**
+ * Checks for keyboard input. Returns whether any new input has occurred.
+ * <key> will be set to the latest keyboard input.
+ * <c> will be set to the keyboard's corresponding character (or \0 if none).
+ */
+bool_t scan(key_state_t *key, char_t *c) {
+    ushort_t index = keyboard.index;
+    ushort_t age = keyboard.queue[keyboard.index].age;
+    hlt();
+    cli();
+    volatile key_state_t *state = &keyboard.queue[keyboard.index];
+    if (index == keyboard.index && age == keyboard.queue[index].age) {
+        sti();
+        return false;
+    }
+    if ((state->flags & KEY_FLAGS_PRESSED) == 0) {
+        sti();
+        return false;
+    }
+    if (key != NULL) {
+        *key = *state;
+    }
+    if (c != NULL) {
+        if (state->code < SCANCODE_REMAPPED) {
+            *c = SCANCHAR[state->code];
+            if (isletter(*c)) {
+                if (((state->flags & KEY_FLAGS_SHIFT) != 0) ^
+                    ((state->flags & KEY_FLAGS_CAPSLOCK) != 0)) {
+                    *c = SCANSHIFT[state->code];
+                }
+            } else if ((state->flags & KEY_FLAGS_SHIFT) != 0) {
+                *c = SCANSHIFT[state->code];
+            }
+        }
+    }
+    sti();
+    return true;
 }
 
 /** Updates the state of the keyboard. */
@@ -77,7 +123,7 @@ void key() {
     }
     bool_t pressed = (code & SCANCODE_RELEASED) == 0;
     code &= ~SCANCODE_RELEASED;
-    volatile key_state_t *state = &keyboard.queue[keyboard.index == 0 ? MAX_KEY_STATES - 1 : keyboard.index - 1];
+    volatile key_state_t *state = &keyboard.queue[keyboard.index];
     uint8_t flags = state->flags;
     if (extended) {
         extended = false;
