@@ -82,5 +82,5 @@ qemu-system-i386\
     -drive file="$BUILD/hlos.img",format=raw\
     -audiodev sdl,id=snd0\
     -device sb16,audiodev=snd0\
-    -machine pcspk-audiodev=snd0
-
+    -machine pcspk-audiodev=snd0\
+    -rtc base="1970-01-01T00:00:00"

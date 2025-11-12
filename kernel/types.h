@@ -35,6 +35,6 @@ typedef float float_t;
 typedef char char_t;
 
 /** A null-terminated immutable sequence of characters. */
-typedef const char_t* string_t;
+typedef const char_t *string_t;
 
 #endif // HLOS_TYPES_T

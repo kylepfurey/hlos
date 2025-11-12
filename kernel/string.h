@@ -12,9 +12,9 @@
 
 /** An enumeration of different comparison results. */
 typedef enum comparison {
-	LESS_THAN = -1,
-	EQUAL_TO = 0,
-	GREATER_THAN = 1
+    LESS_THAN = -1,
+    EQUAL_TO = 0,
+    GREATER_THAN = 1
 } comparison_t;
 
 /** Returns whether the given character is a letter. */
@@ -48,7 +48,7 @@ uint_t strmin(string_t left, string_t right);
 uint_t strhash(string_t str);
 
 /** Safely copies <src> into <dest> with proper null-termination. Returns <dest>. */
-char_t* strcopy(char_t* dest, string_t src);
+char_t *strcopy(char_t *dest, string_t src);
 
 /**
  * Compares <left> and <right> character by character.
@@ -57,13 +57,13 @@ char_t* strcopy(char_t* dest, string_t src);
 comparison_t strcompare(string_t left, string_t right);
 
 /** Safely sets each character in <str> to <c>. Returns <str>. */
-char_t* strset(char_t* str, char_t c);
+char_t *strset(char_t *str, char_t c);
 
 /** Safely swaps the characters of <left> and <right> with proper null-termination. Returns <left>. */
-char_t* strswap(char_t* left, char_t* right);
+char_t *strswap(char_t *left, char_t *right);
 
 /** Safely reverses each character in <str>. Returns <str>. */
-char_t* strflip(char_t* str);
+char_t *strflip(char_t *str);
 
 /** Returns the index of the first character that matches <c> in <str> (or NOT_FOUND). */
 uint_t strfirst(string_t str, char_t c);
@@ -75,45 +75,45 @@ uint_t strlast(string_t str, char_t c);
 uint_t strfind(string_t dest, string_t src);
 
 /** Safely appends the characters in <src> to <dest> with proper null-termination. Returns <dest>. */
-char_t* strappend(char_t* dest, string_t src);
+char_t *strappend(char_t *dest, string_t src);
 
 /** Safely appends <c> at the end of <str> with proper null-termination. Returns <str>. */
-char_t* strpush(char_t* str, char_t c);
+char_t *strpush(char_t *str, char_t c);
 
 /** Safely removes <num> characters from the end of <str> with proper null-termination. Returns <str>. */
-char_t* strpop(char_t* str, uint_t num);
+char_t *strpop(char_t *str, uint_t num);
 
 /** Safely removes <num> characters from the front of <str> with proper null-termination. Returns <str>. */
-char_t* strpull(char_t* str, uint_t num);
+char_t *strpull(char_t *str, uint_t num);
 
 /** Safely copies <len> characters in <src> to <dest> with proper null-termination. Returns <dest>. */
-char_t* substr(char_t* dest, string_t src, uint_t len);
+char_t *substr(char_t *dest, string_t src, uint_t len);
 
 /** Converts all characters in <str> to uppercase. Returns <str>. */
-char_t* strupper(char_t* str);
+char_t *strupper(char_t *str);
 
 /** Converts all characters in <str> to lowercase. Returns <str>. */
-char_t* strlower(char_t* str);
+char_t *strlower(char_t *str);
 
 /** Safely removes leading, trailing, and duplicate whitespace characters in <str> with proper null-termination. Returns <str>. */
-char_t* strnormal(char_t* str);
+char_t *strnormal(char_t *str);
 
 /**
  * Transforms the given string using the given <trans> function. Returns <str>.
  * <trans> is a function that inputs a pointer to the start of the string, a pointer to the
  * current character, and returns whether the character should be inserted back into the string.
  */
-char_t* strtrans(char_t* str, bool_t(*trans)(char_t*, char_t*));
+char_t *strtrans(char_t *str, bool_t (*trans)(char_t *, char_t *));
 
 /**
  * Converts a string into an integer if possible.
  * <num> is set to the integer if <str> represents a valid integer.
  * Returns whether the string was successfully converted.
  */
-bool_t strint(string_t str, int_t* num);
+bool_t strint(string_t str, int_t *num);
 
 /**
- * Converts a integer into a string.
+ * Converts an integer into a string.
  * The returned string is reused for all conversions.
  */
 string_t intstr(int_t num);

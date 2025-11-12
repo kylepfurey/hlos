@@ -41,6 +41,6 @@ bool_t filemove(string_t start, string_t end);
 bool_t filedelete(string_t path);
 
 /** Returns whether a file exists and writes its size into <size>. */
-bool_t filesize(string_t path, uint_t* size);
+bool_t filesize(string_t path, uint_t *size);
 
 #endif // HLOS_FILE_H

@@ -14,10 +14,12 @@ global sti							; void sti()
 global in							; byte_t in(ushort_t port)
 global out							; void out(ushort_t port, byte_t num)
 global timer_interrupt				; void timer_interrupt()
+global keyboard_interrupt			; void keyboard_interrupt()
 
 
 ; Declare external functions
 extern tick							; void tick()
+extern key							; void key()
 
 
 ; Pauses the CPU
@@ -70,6 +72,24 @@ timer_interrupt:
 	push fs							; Push general purpose segment selector to the stack
 	push gs							; Push general purpose segment selector to the stack
 	call tick						; Call tick() in C
+	mov al, 0x20					; Store the end-of-interrupt command
+	out 0x20, al					; Send end-of-interrupt command to the master PIC
+	pop gs							; Pop general purpose segment selector from the stack
+	pop fs							; Pop general purpose segment selector from the stack
+	pop es							; Pop extra segment selector from the stack
+	pop ds							; Pop data segment from the stack
+	popad							; Pop 32-bit registers from the stack
+	iret							; Exit interrupt
+
+
+; The callback for the keyboard interrupt
+keyboard_interrupt:
+	pushad							; Push 32-bit registers to the stack
+	push ds							; Push data segment selector to the stack
+	push es							; Push extra segment selector to the stack
+	push fs							; Push general purpose segment selector to the stack
+	push gs							; Push general purpose segment selector to the stack
+	call key						; Call key() in C
 	mov al, 0x20					; Store the end-of-interrupt command
 	out 0x20, al					; Send end-of-interrupt command to the master PIC
 	pop gs							; Pop general purpose segment selector from the stack

@@ -12,57 +12,57 @@
 
 /** Video Graphics Array sizes. */
 typedef enum VGA_size {
-	VGA_WIDTH = 80,
-	VGA_HEIGHT = 25,
-	VGA_SIZE = VGA_WIDTH * VGA_HEIGHT,
+    VGA_WIDTH = 80,
+    VGA_HEIGHT = 25,
+    VGA_SIZE = VGA_WIDTH * VGA_HEIGHT,
 } VGA_size_t;
 
 /** Video Graphics Array colors. */
 typedef enum VGA_color {
-	VGA_COLOR_BLACK = 0x0,
-	VGA_COLOR_BLUE = 0x1,
-	VGA_COLOR_GREEN = 0x2,
-	VGA_COLOR_CYAN = 0x3,
-	VGA_COLOR_RED = 0x4,
-	VGA_COLOR_MAGENTA = 0x5,
-	VGA_COLOR_BROWN = 0x6,
-	VGA_COLOR_LIGHT_GRAY = 0x7,
-	VGA_COLOR_DARK_GRAY = 0x8,
-	VGA_COLOR_LIGHT_BLUE = 0x9,
-	VGA_COLOR_LIGHT_GREEN = 0xA,
-	VGA_COLOR_LIGHT_CYAN = 0xB,
-	VGA_COLOR_LIGHT_RED = 0xC,
-	VGA_COLOR_LIGHT_MAGENTA = 0xD,
-	VGA_COLOR_YELLOW = 0xE,
-	VGA_COLOR_WHITE = 0xF,
+    VGA_COLOR_BLACK = 0x0,
+    VGA_COLOR_BLUE = 0x1,
+    VGA_COLOR_GREEN = 0x2,
+    VGA_COLOR_CYAN = 0x3,
+    VGA_COLOR_RED = 0x4,
+    VGA_COLOR_MAGENTA = 0x5,
+    VGA_COLOR_BROWN = 0x6,
+    VGA_COLOR_LIGHT_GRAY = 0x7,
+    VGA_COLOR_DARK_GRAY = 0x8,
+    VGA_COLOR_LIGHT_BLUE = 0x9,
+    VGA_COLOR_LIGHT_GREEN = 0xA,
+    VGA_COLOR_LIGHT_CYAN = 0xB,
+    VGA_COLOR_LIGHT_RED = 0xC,
+    VGA_COLOR_LIGHT_MAGENTA = 0xD,
+    VGA_COLOR_YELLOW = 0xE,
+    VGA_COLOR_WHITE = 0xF,
 } VGA_color_t;
 
 /** Represents a single character in the Video Graphics Array. */
 typedef struct VGA_char {
-	/** The value of this character. */
-	char_t character;
+    /** The value of this character. */
+    char_t character;
 
-	/**
-	 * The foreground and background color of this character.
-	 * The low 4 bits represent the foreground color.
-	 * The high 4 bits represent the background color.
-	 */
-	byte_t color;
+    /**
+     * The foreground and background color of this character.
+     * The low 4 bits represent the foreground color.
+     * The high 4 bits represent the background color.
+     */
+    byte_t color;
 } VGA_char_t;
 
 /** Data for the state of the Video Graphics Array. */
 typedef struct VGA {
-	/** The address of the Video Graphics Array. */
-	volatile VGA_char_t* const array;
+    /** The address of the Video Graphics Array. */
+    volatile VGA_char_t *const array;
 
-	/** The current column of the Video Graphics Array. */
-	byte_t column;
+    /** The current column of the Video Graphics Array. */
+    byte_t column;
 
-	/** The current row of the Video Graphics Array. */
-	byte_t row;
+    /** The current row of the Video Graphics Array. */
+    byte_t row;
 
-	/** The current color of the Video Graphics Array. */
-	byte_t color;
+    /** The current color of the Video Graphics Array. */
+    byte_t color;
 } VGA_t;
 
 /** The Video Graphics Array. */

@@ -18,8 +18,8 @@
 
 /** Audio speaker flags. */
 typedef enum speaker_flags {
-	SPEAKER_FLAGS_ENABLE = 3,
-	SPEAKER_FLAGS_CLEAR = 252,
+    SPEAKER_FLAGS_ENABLE = 3,
+    SPEAKER_FLAGS_CLEAR = 252,
 } speaker_flags_t;
 
 /** Beeps the computer. */

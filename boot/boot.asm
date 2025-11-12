@@ -33,7 +33,7 @@ init_stack16:
 ; Loads the kernel from disk
 load_kernel:
 	mov ah, 0x2						; Set BIOS read sectors function
-	mov al, 20						; Set number of sectors (kernel size / 512 rounded up)
+	mov al, 25						; Set number of sectors (kernel size / 512 rounded up)
 	mov ch, 0x0						; Set cylinder 0
 	mov cl, 0x2						; Set sector after bootloader
 	mov dh, 0x0						; Set head 0
@@ -96,11 +96,6 @@ msg_error:
 pause:
 	hlt								; Halt CPU
 	jmp pause						; Infinitely loop
-
-
-; Message for the professor
-msg_professor:
-	db 0xD, 0xA, 'Hello Professor Sindhu!', 0xD, 0xA, 0x0
 
 
 ; Enters 32-bit protected mode

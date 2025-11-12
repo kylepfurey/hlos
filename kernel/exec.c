@@ -10,7 +10,7 @@
  * Returns an error string or NULL on a successful execution.
  */
 string_t exec(string_t code) {
-	assert(code != NULL, "exec() - code was NULL!");
-	// TODO
-	return NULL;
+    assert(code != NULL, "exec() - code was NULL!");
+    // TODO
+    return NULL;
 }

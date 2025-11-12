@@ -27,4 +27,7 @@ extern void out(ushort_t port, byte_t num);
 /** The callback for the timer interrupt. */
 extern void timer_interrupt();
 
+/** The callback for the keyboard interrupt. */
+extern void keyboard_interrupt();
+
 #endif // HLOS_ASSEMBLY_H
