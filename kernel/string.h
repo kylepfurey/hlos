@@ -8,7 +8,7 @@
 #include "types.h"
 
 /** The maximum length of a string buffer (including the null-terminator). */
-#define MAX_STRING_LEN 1028
+#define MAX_STRING_LEN VGA_SIZE
 
 /** An enumeration of different comparison results. */
 typedef enum comparison {

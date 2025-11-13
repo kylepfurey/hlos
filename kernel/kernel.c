@@ -7,9 +7,10 @@
 /** The entry point of the HLOS kernel. */
 void kernel_main() {
     init();
+
     clear();
-    VGA.row = VGA_HEIGHT - 2;
-    read();
+    read(MAX_INPUT_LEN);
+
     sleep(1000);
     beep();
     clear();

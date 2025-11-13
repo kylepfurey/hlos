@@ -42,9 +42,10 @@ volatile keyboard_t keyboard = {0};
 
 /**
  * Reads an input string from the user.
+ * The maximum string length is min(<len>, MAX_INPUT_LEN).
  * The returned string is reused for all conversions.
  */
-string_t read() {
+string_t read(ushort_t len) {
     static char_t buffer[MAX_INPUT_LEN] = {0};
     char_t *current = buffer;
     char_t *end = buffer;
@@ -53,8 +54,8 @@ string_t read() {
     ushort_t size = 0;
     byte_t startcol = VGA.column;
     byte_t startrow = VGA.row;
-    uint_t fliptime = time() + 500;
-    bool_t flipped = false;
+    uint_t blinktime = time() + 500;
+    bool_t blinking = false;
     while (true) {
         if (scan(&key, &c)) {
             if (c != '\0') {
@@ -66,7 +67,7 @@ string_t read() {
                 } else {
                     app = 1;
                 }
-                if (size + app >= VGA_SIZE &&
+                if (size + app >= min(len, MAX_INPUT_LEN) &&
                     (c != '\n' || (key.flags & KEY_FLAGS_SHIFT) != 0)) {
                     continue;
                 }
@@ -74,8 +75,8 @@ string_t read() {
                 copy(current + 1, current, end - current);
                 *current++ = c;
                 ++end;
-                if (flipped) {
-                    flipped = false;
+                if (blinking) {
+                    blinking = false;
                     byte_t fg = VGA.color & 15;
                     byte_t bg = (VGA.color >> 4) & 15;
                     VGA.color = VGA_COLOR(bg, fg);
@@ -100,13 +101,13 @@ string_t read() {
                 // TODO
             }
         }
-        if (time() > fliptime) {
+        if (time() > blinktime) {
             byte_t fg = VGA.color & 15;
             byte_t bg = (VGA.color >> 4) & 15;
             VGA.color = VGA_COLOR(bg, fg);
             VGA.array[VGA.column + VGA.row * VGA_WIDTH].color = VGA.color;
-            flipped = !flipped;
-            fliptime = time() + 500;
+            blinking = !blinking;
+            blinktime = time() + 500;
         }
     }
     *end = '\0';
@@ -131,7 +132,7 @@ char_t readchar() {
  * Returns whether the read was successful.
  */
 bool_t readint(int_t *num) {
-    return strint(read(), num);
+    return strint(read(12), num);
 }
 
 /**

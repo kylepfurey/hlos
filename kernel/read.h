@@ -13,8 +13,8 @@
 /** Keyboard status port. */
 #define KEYBOARD_STATUS_PORT 0x64
 
-/** The maximum length of a received input string (including the null terminator). */
-#define MAX_INPUT_LEN VGA_SIZE
+/** The maximum length of a received input string (including the null-terminator). */
+#define MAX_INPUT_LEN MAX_STRING_LEN
 
 /** The number of key states in the circular keyboard queue. */
 #define MAX_KEY_STATES 16
@@ -174,9 +174,10 @@ extern volatile keyboard_t keyboard;
 
 /**
  * Reads an input string from the user.
+ * The maximum string length is min(<len>, MAX_INPUT_LEN).
  * The returned string is reused for all conversions.
  */
-string_t read();
+string_t read(ushort_t len);
 
 /** Reads a single character from the user. */
 char_t readchar();

@@ -13,6 +13,7 @@ global cli							; void cli()
 global sti							; void sti()
 global in							; byte_t in(ushort_t port)
 global out							; void out(ushort_t port, byte_t num)
+global call							; void call(void *addr)
 global timer_interrupt				; void timer_interrupt()
 global keyboard_interrupt			; void keyboard_interrupt()
 
@@ -57,6 +58,16 @@ out:
 	mov dx, [ebp+8]					; Store <port>
 	mov al, [ebp+12]				; Store <num>
 	out dx, al						; Write <num> to <port>
+	pop ebp							; Pop base pointer from the stack
+	ret								; Exit function
+
+
+; Jumps to and begins executing the given memory address until it returns
+call:
+	push ebp						; Push base pointer to the stack
+	mov ebp, esp					; Store the stack pointer
+	mov eax, [ebp+8] 				; Store <addr>
+	call eax						; Execute code at <addr>
 	pop ebp							; Pop base pointer from the stack
 	ret								; Exit function
 

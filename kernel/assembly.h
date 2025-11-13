@@ -22,6 +22,9 @@ extern byte_t in(ushort_t port);
 /** Writes a byte to the given IO port. */
 extern void out(ushort_t port, byte_t num);
 
+/** Jumps to and begins executing the given memory address until it returns. */
+extern void call(const void *addr);
+
 // INTERRUPTS
 
 /** The callback for the timer interrupt. */

@@ -64,7 +64,7 @@ msg_boot:
 
 ; Prints the string held in the source index register (16-bit)
 print16:
-	push si							; Push source index into the stack 
+	push si							; Push source index into the stack
 	push ax							; Push accumulator into the stack
 .loop:
 	lodsb							; Load the next character into the lower byte of accumulator
@@ -75,7 +75,7 @@ print16:
 	jmp .loop						; Loop
 .exit:
 	pop ax							; Pop accumulator from the stack
-	pop si							; Pop source index from the stack 
+	pop si							; Pop source index from the stack
 	ret								; Exit function
 
 

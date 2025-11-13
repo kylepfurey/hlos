@@ -71,10 +71,10 @@ uint_t strmin(string_t left, string_t right) {
 uint_t strhash(string_t str) {
     assert(str != NULL, "strhash() - str was NULL!");
     // FNV-1a
-    uint_t hash = 2166136261u; // FNV offset
+    uint_t hash = 2166136261; // FNV offset
     for (uint_t i = 0; str[i] != '\0'; ++i) {
         hash ^= (byte_t) str[i];
-        hash *= 16777619u; // FNV prime
+        hash *= 16777619; // FNV prime
     }
     return hash;
 }
@@ -379,7 +379,7 @@ bool_t strint(string_t str, int_t *num) {
  * The returned string is reused for all conversions.
  */
 string_t intstr(int_t num) {
-    static char_t buffer[12] = {0}; // Longest string: -2147483648\0
+    static char_t buffer[12] = {0}; // Longest string: -2147483647\0
     char_t *current = &buffer[11];
     bool_t positive = (num >= 0);
     uint_t magnitude = positive ? (uint_t) num : (uint_t) (-(num + 1)) + 1;
