@@ -9,6 +9,7 @@ void kernel_main() {
     init();
 
     clear();
+    VGA.row = VGA_HEIGHT - 2;
     read(MAX_INPUT_LEN);
 
     sleep(1000);

@@ -98,7 +98,25 @@ string_t read(ushort_t len) {
                 if (current == buffer) {
                     continue;
                 }
-                // TODO
+                c = *(current - 1);
+                for (ushort_t i = startcol + startrow * VGA_WIDTH; i < size; ++i) {
+                    VGA.array[i].character = ' ';
+                }
+                --current;
+                copy(current, current + 1, end - current);
+                --end;
+                if (blinking) {
+                    blinking = false;
+                    byte_t fg = VGA.color & 15;
+                    byte_t bg = (VGA.color >> 4) & 15;
+                    VGA.color = VGA_COLOR(bg, fg);
+                    VGA.array[VGA.column + VGA.row * VGA_WIDTH].color = VGA.color;
+                }
+                VGA.column = startcol;
+                VGA.row = startrow;
+                print(buffer);
+                size = (VGA.column + VGA.row * VGA_WIDTH) - (startcol + startrow * VGA_WIDTH);
+                VGA.array[VGA.column + VGA.row * VGA_WIDTH].character = ' ';
             }
         }
         if (time() > blinktime) {
