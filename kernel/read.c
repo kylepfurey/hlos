@@ -118,6 +118,7 @@ string_t read(ushort_t len) {
                 size = (VGA.column + VGA.row * VGA_WIDTH) - (startcol + startrow * VGA_WIDTH);
                 VGA.array[VGA.column + VGA.row * VGA_WIDTH].character = ' ';
             }
+            // TODO: DELETE, ARROWS, PAGE UP/DOWN, CTRL+BACKSPACE, CTRL+DELETE, CTRL+ARROWS
         }
         if (time() > blinktime) {
             byte_t fg = VGA.color & 15;

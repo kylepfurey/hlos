@@ -13,6 +13,18 @@
 /** Keyboard status port. */
 #define KEYBOARD_STATUS_PORT 0x64
 
+/** Indicates the keyboard is busy. */
+#define KEYBOARD_STATUS_BUSY 0x2
+
+/** Reboots the computer when sent to the KEYBOARD_STATUS_PORT. */
+#define KEYBOARD_REBOOT 0xFE
+
+/** Advanced Configuration and Power Interface port. */
+#define ACPI_PORT 0x604
+
+/** Shuts down the computer when sent to the ACPI_PORT. */
+#define ACPI_SHUTDOWN 0x2000
+
 /** The maximum length of a received input string (including the null-terminator). */
 #define MAX_INPUT_LEN MAX_STRING_LEN
 

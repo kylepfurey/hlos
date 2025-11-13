@@ -4,13 +4,38 @@
 
 #include "lib.h"
 #include "assembly.h"
-#include "print.h"
+#include "read.h"
+#include "time.h"
 
 /** Halts the kernel. */
 void pause() {
     while (true) {
         hlt();
     }
+}
+
+/** Shuts down the kernel after the given number of milliseconds. */
+void shutdown(uint_t ms) {
+    sleep(ms);
+    while ((in(KEYBOARD_STATUS_PORT) & KEYBOARD_STATUS_BUSY) != 0) {
+        hlt();
+    }
+    cli();
+    clear();
+    out2(ACPI_PORT, ACPI_SHUTDOWN);
+    pause();
+}
+
+/** Reboots the kernel after the given number of milliseconds. */
+void reboot(uint_t ms) {
+    sleep(ms);
+    while ((in(KEYBOARD_STATUS_PORT) & KEYBOARD_STATUS_BUSY) != 0) {
+        hlt();
+    }
+    cli();
+    clear();
+    out(KEYBOARD_STATUS_PORT, KEYBOARD_REBOOT);
+    pause();
 }
 
 /** Crashes the kernel with an error if the given condition is false. */

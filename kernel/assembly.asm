@@ -13,6 +13,8 @@ global cli							; void cli()
 global sti							; void sti()
 global in							; byte_t in(ushort_t port)
 global out							; void out(ushort_t port, byte_t num)
+global in2							; ushort_t in2(ushort_t port)
+global out2							; void out2(ushort_t port, ushort_t num)
 global call							; void call(void *addr)
 global timer_interrupt				; void timer_interrupt()
 global keyboard_interrupt			; void keyboard_interrupt()
@@ -58,6 +60,27 @@ out:
 	mov dx, [ebp+8]					; Store <port>
 	mov al, [ebp+12]				; Store <num>
 	out dx, al						; Write <num> to <port>
+	pop ebp							; Pop base pointer from the stack
+	ret								; Exit function
+
+
+; Reads a short from the given IO port
+in2:
+	push ebp						; Push base pointer to the stack
+	mov ebp, esp					; Store the stack pointer
+	mov dx, [ebp+8]					; Store <port>
+	in ax, dx						; Read from <port>
+	pop ebp							; Pop base pointer from the stack
+	ret								; Exit function
+
+
+; Writes a short to the given IO port
+out2:
+	push ebp						; Push base pointer to the stack
+	mov ebp, esp					; Store the stack pointer
+	mov dx, [ebp+8]					; Store <port>
+	mov ax, [ebp+12]				; Store <num>
+	out dx, ax						; Write <num> to <port>
 	pop ebp							; Pop base pointer from the stack
 	ret								; Exit function
 

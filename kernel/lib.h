@@ -16,6 +16,12 @@
 /** Halts the kernel. */
 void pause();
 
+/** Shuts down the kernel after the given number of milliseconds. */
+void shutdown(uint_t ms);
+
+/** Reboots the kernel after the given number of milliseconds. */
+void reboot(uint_t ms);
+
 /** Crashes the kernel with an error if the given condition is false. */
 void assert(bool_t cond, string_t err);
 

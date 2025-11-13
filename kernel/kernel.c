@@ -9,7 +9,6 @@ void kernel_main() {
     init();
 
     clear();
-    VGA.row = VGA_HEIGHT - 2;
     read(MAX_INPUT_LEN);
 
     sleep(1000);
@@ -52,7 +51,8 @@ void kernel_main() {
     sleep(750);
     print("\n\n\t\t\tYaay!");
     VGA.row -= 2;
-    while (true) {
+    uint_t t = time() + 2000;
+    while (time() < t) {
         for (uint_t i = 0; i < length; ++i) {
             char_t character = pos(i, VGA.row);
             color(rainbow[(index + i) % size], VGA_COLOR_BLACK);
@@ -62,5 +62,5 @@ void kernel_main() {
         --index;
     }
 
-    pause();
+    shutdown(0);
 }

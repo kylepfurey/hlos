@@ -80,4 +80,10 @@ echo.
 type "%BUILD%\boot.bin" "%BUILD%\kernel.bin" > "%BUILD%\hlos.img"
 
 :: Boot hlos.img in QEMU
-"%PROGRAMFILES%\qemu\qemu-system-i386.exe" -fda "%BUILD%\hlos.img" -drive file="%BUILD%\hlos.img",format=raw
+"%PROGRAMFILES%\qemu\qemu-system-i386.exe"^
+    -fda "%BUILD%\hlos.img"^
+    -drive file="%BUILD%\hlos.img",format=raw^
+    -audiodev sdl,id=snd0^
+    -device sb16,audiodev=snd0^
+    -machine pcspk-audiodev=snd0^
+    -rtc base="1970-01-01T00:00:00"
