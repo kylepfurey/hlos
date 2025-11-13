@@ -98,27 +98,38 @@ string_t read(ushort_t len) {
                 if (current == buffer) {
                     continue;
                 }
-                c = *(current - 1);
-                for (ushort_t i = startcol + startrow * VGA_WIDTH; i < size; ++i) {
-                    VGA.array[i].character = ' ';
-                }
-                --current;
-                copy(current, current + 1, end - current);
-                --end;
-                if (blinking) {
-                    blinking = false;
-                    byte_t fg = VGA.color & 15;
-                    byte_t bg = (VGA.color >> 4) & 15;
-                    VGA.color = VGA_COLOR(bg, fg);
-                    VGA.array[VGA.column + VGA.row * VGA_WIDTH].color = VGA.color;
-                }
-                VGA.column = startcol;
-                VGA.row = startrow;
-                print(buffer);
-                size = (VGA.column + VGA.row * VGA_WIDTH) - (startcol + startrow * VGA_WIDTH);
-                VGA.array[VGA.column + VGA.row * VGA_WIDTH].character = ' ';
+                char_t first = *(current - 1);
+                do {
+                    if (current == buffer) {
+                        break;
+                    }
+                    c = *(current - 1);
+                    if ((key.flags & KEY_FLAGS_CTRL) != 0 && first != '\n' &&
+                        (c == '\n' || isspace(c) != isspace(first))) {
+                        break;
+                    }
+                    for (ushort_t i = startcol + startrow * VGA_WIDTH; i < size; ++i) {
+                        VGA.array[i].character = ' ';
+                    }
+                    --current;
+                    copy(current, current + 1, end - current);
+                    --end;
+                    if (blinking) {
+                        blinking = false;
+                        byte_t fg = VGA.color & 15;
+                        byte_t bg = (VGA.color >> 4) & 15;
+                        VGA.color = VGA_COLOR(bg, fg);
+                        VGA.array[VGA.column + VGA.row * VGA_WIDTH].color = VGA.color;
+                    }
+                    VGA.column = startcol;
+                    VGA.row = startrow;
+                    print(buffer);
+                    size = (VGA.column + VGA.row * VGA_WIDTH) - (startcol + startrow * VGA_WIDTH);
+                    VGA.array[VGA.column + VGA.row * VGA_WIDTH].character = ' ';
+                } while ((key.flags & KEY_FLAGS_CTRL) != 0 &&
+                         (first != '\n' || c != '\n') && isspace(c) == isspace(first));
             }
-            // TODO: DELETE, ARROWS, PAGE UP/DOWN, CTRL+BACKSPACE, CTRL+DELETE, CTRL+ARROWS
+            // TODO: DELETE, ARROWS, PAGE UP/DOWN, CTRL+DELETE, CTRL+ARROWS
         }
         if (time() > blinktime) {
             byte_t fg = VGA.color & 15;

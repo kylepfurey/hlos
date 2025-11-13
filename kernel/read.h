@@ -26,7 +26,7 @@
 #define ACPI_SHUTDOWN 0x2000
 
 /** The maximum length of a received input string (including the null-terminator). */
-#define MAX_INPUT_LEN MAX_STRING_LEN
+#define MAX_INPUT_LEN VGA_SIZE
 
 /** The number of key states in the circular keyboard queue. */
 #define MAX_KEY_STATES 16
