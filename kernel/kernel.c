@@ -8,9 +8,6 @@
 void kernel_main() {
     init();
 
-    clear();
-    read(MAX_INPUT_LEN);
-
     sleep(1000);
     beep();
     clear();
@@ -62,5 +59,9 @@ void kernel_main() {
         --index;
     }
 
-    shutdown(0);
+    color(VGA_COLOR_GREEN, VGA_COLOR_BLACK); // Matrix style
+    clear();
+    read(MAX_INPUT_LEN);
+
+    shutdown(1000);
 }
