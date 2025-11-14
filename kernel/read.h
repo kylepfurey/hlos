@@ -185,11 +185,11 @@ extern const char_t SCANSHIFT[SCANCODE_COUNT];
 extern volatile keyboard_t keyboard;
 
 /**
- * Reads an input string from the user.
+ * Reads an input string from the user, appended to <start>.
  * The maximum string length is min(<len>, MAX_INPUT_LEN).
  * The returned string is reused for all conversions.
  */
-string_t read(ushort_t len);
+string_t read(ushort_t len, string_t start);
 
 /** Reads a single character from the user. */
 char_t readchar();

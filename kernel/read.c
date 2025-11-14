@@ -41,11 +41,11 @@ const char_t SCANSHIFT[SCANCODE_COUNT] = {
 volatile keyboard_t keyboard = {0};
 
 /**
- * Reads an input string from the user.
+ * Reads an input string from the user, appended to <start>.
  * The maximum string length is min(<len>, MAX_INPUT_LEN).
  * The returned string is reused for all conversions.
  */
-string_t read(ushort_t len) {
+string_t read(ushort_t len, string_t start) {
     static char_t buffer[MAX_INPUT_LEN] = {0};
     char_t *current = buffer;
     char_t *end = buffer;
@@ -56,6 +56,14 @@ string_t read(ushort_t len) {
     byte_t startrow = VGA.row;
     uint_t blinktime = time() + 500;
     bool_t blinking = false;
+    if (start != NULL) {
+        uint_t startlen = strlen(start);
+        assert(startlen < min(len, MAX_INPUT_LEN), "read() - start length > len!");
+        strcopy(buffer, start);
+        current = buffer + startlen;
+        end = current;
+        goto render;
+    }
     while (true) {
         if (scan(&key, &c)) {
             if (blinking) {
@@ -67,6 +75,9 @@ string_t read(ushort_t len) {
             }
             blinktime = time();
             if (c != '\0') {
+                if (c == '\n' && (key.flags & KEY_FLAGS_SHIFT) == 0) {
+                    break;
+                }
                 uint_t app;
                 switch (c) {
                     case '\t':
@@ -86,10 +97,6 @@ string_t read(ushort_t len) {
                 copy(current + 1, current, end - current);
                 *current++ = c;
                 ++end;
-                if (c == '\n' && (key.flags & KEY_FLAGS_SHIFT) == 0) {
-                    --end;
-                    break;
-                }
             } else {
                 char_t first;
                 byte_t targetcol;
@@ -288,14 +295,15 @@ string_t read(ushort_t len) {
                         break;
                 }
             }
-            uint_t start = startcol + startrow * VGA_WIDTH;
-            for (uint_t i = start; i < min((uint_t) (start + size), VGA_SIZE); ++i) {
+        render:
+            uint_t begin = startcol + startrow * VGA_WIDTH;
+            for (uint_t i = begin; i < min((uint_t) (begin + size), VGA_SIZE); ++i) {
                 VGA.array[i].character = ' ';
             }
             VGA.column = startcol;
             VGA.row = startrow;
             print(buffer);
-            if (start > VGA_POS) {
+            if (begin > VGA_POS) {
                 clear();
                 startcol = 0;
                 startrow = 0;
@@ -358,7 +366,7 @@ char_t readchar() {
  * Returns whether the read was successful.
  */
 bool_t readint(int_t *num) {
-    return strint(read(12), num);
+    return strint(read(12, NULL), num);
 }
 
 /**
