@@ -17,7 +17,7 @@
 #define MAX_COROUTINES_PROCESSED 2
 
 /** An asynchronous coroutine. */
-typedef struct coro {
+typedef struct coroutine {
     /** The current handle for this coroutine. */
     uint_t handle;
 
@@ -29,13 +29,13 @@ typedef struct coro {
 
     /** A pointer to arguments for this coroutine. */
     void *args;
-} coro_t;
+} coroutine_t;
 
 /** Each bound event function. */
 extern void (*volatile events[MAX_EVENTS])(void *);
 
 /** Each bound coroutine. */
-extern volatile coro_t coroutines[MAX_COROUTINES];
+extern volatile coroutine_t coroutines[MAX_COROUTINES];
 
 /** Sets the event callback at the given index. */
 void event(uint_t index, void (*event)(void *));
