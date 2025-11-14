@@ -11,7 +11,7 @@
 void (*volatile events[MAX_EVENTS])(void *) = {0};
 
 /** Each bound coroutine. */
-volatile coro_t coroutines[MAX_COROUTINES] = {0};
+volatile coroutine_t coroutines[MAX_COROUTINES] = {0};
 
 /** Sets the event callback at the given index. */
 void event(uint_t index, void (*event)(void *)) {
@@ -36,7 +36,7 @@ uint_t coro(uint_t ms, void (*coroutine)(void *), void *args) {
     assert(coroutine != NULL, "coro() - coroutine was NULL!");
     uint_t schedule = time() + ms;
     cli();
-    volatile coro_t *coro = NULL;
+    volatile coroutine_t *coro = NULL;
     uint_t handle;
     for (uint_t i = 0; i < MAX_COROUTINES; ++i) {
         if (coroutines[i].handle % MAX_COROUTINES != i) {
@@ -59,7 +59,7 @@ uint_t coro(uint_t ms, void (*coroutine)(void *), void *args) {
 /** Attempts to cancel the coroutine with the given handle. */
 bool_t cancel(uint_t handle) {
     cli();
-    volatile coro_t *coro = &coroutines[handle % MAX_COROUTINES];
+    volatile coroutine_t *coro = &coroutines[handle % MAX_COROUTINES];
     bool_t result;
     if (handle == coro->handle) {
         coro->handle += MAX_COROUTINES;
