@@ -4,6 +4,9 @@
 
 #include "hlos.h"
 
+/** Coroutine for the clock. */
+void clock(void *hr24);
+
 /** The entry point of the HLOS kernel. */
 void kernel_main() {
     init();
@@ -59,9 +62,26 @@ void kernel_main() {
         --index;
     }
 
-    color(VGA_COLOR_GREEN, VGA_COLOR_BLACK); // Matrix style
     clear();
-    read(MAX_INPUT_LEN);
+    clock((void *) false);
+    printchar('\n');
+    color(VGA_COLOR_GREEN, VGA_COLOR_BLACK); // Matrix style
+    read(VGA_SIZE - VGA_POS);
 
     shutdown(1000);
+}
+
+/** Coroutine for the clock. */
+void clock(void *hr24) {
+    coro(1000, clock, hr24);
+    byte_t col = VGA.column;
+    byte_t row = VGA.row;
+    byte_t color = VGA.color;
+    VGA.column = 0;
+    VGA.row = 0;
+    VGA.color = VGA_COLOR(VGA_COLOR_WHITE, VGA_COLOR_BLACK);
+    print(datestr(date(), hr24));
+    VGA.column = col;
+    VGA.row = row;
+    VGA.color = color;
 }

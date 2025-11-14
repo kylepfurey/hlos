@@ -5,6 +5,7 @@
 #include "time.h"
 #include "lib.h"
 #include "assembly.h"
+#include "event.h"
 
 /** The number of ticks since the kernel started. */
 volatile uint_t ticks = 0;
@@ -154,4 +155,5 @@ string_t datestr(date_t date, bool_t hr24) {
 /** Increments the kernel timer. */
 void tick() {
     ticks += speed;
+    async();
 }

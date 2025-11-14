@@ -8,7 +8,10 @@
 #include "string.h"
 
 /** Combines a foreground and background color for the Video Graphics Array. */
-#define VGA_COLOR(fg, bg) ((bg << 4) | (fg & 0xF))
+#define VGA_COLOR(fg, bg) ((bg << 4) | (fg & 15))
+
+/** Returns the current index of the VGA. */
+#define VGA_POS (VGA.column + (VGA.row * VGA_WIDTH))
 
 /** The number of spaces that equal one \t tab. */
 #define TAB_WIDTH 4

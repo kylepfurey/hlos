@@ -63,7 +63,7 @@ string_t read(ushort_t len) {
                 byte_t fg = VGA.color & 15;
                 byte_t bg = (VGA.color >> 4) & 15;
                 VGA.color = VGA_COLOR(bg, fg);
-                VGA.array[VGA.column + VGA.row * VGA_WIDTH].color = VGA.color;
+                VGA.array[VGA_POS].color = VGA.color;
             }
             blinktime = time();
             if (c != '\0') {
@@ -79,7 +79,7 @@ string_t read(ushort_t len) {
                         app = 1;
                         break;
                 }
-                if (end - buffer >= min(len, MAX_INPUT_LEN) ||
+                if (end - buffer >= min(len, MAX_INPUT_LEN) - 1 ||
                     size + app >= VGA_SIZE) {
                     continue;
                 }
@@ -111,7 +111,9 @@ string_t read(ushort_t len) {
                             c = *(current - 1);
                             if ((key.flags & KEY_FLAGS_CTRL) != 0 && first != '\n' &&
                                 (c == '\n' ||
-                                 isletter(c) != isletter(first) || isspace(c) != isspace(first))) {
+                                 isletter(c) != isletter(first) ||
+                                 isnumber(c) != isnumber(first) ||
+                                 isspace(c) != isspace(first))) {
                                 break;
                             }
                             --current;
@@ -119,7 +121,9 @@ string_t read(ushort_t len) {
                             --end;
                         } while ((key.flags & KEY_FLAGS_CTRL) != 0 &&
                                  (first != '\n' || c != '\n') &&
-                                 isletter(c) == isletter(first) && isspace(c) == isspace(first));
+                                 isletter(c) == isletter(first) &&
+                                 isnumber(c) == isnumber(first) &&
+                                 isspace(c) == isspace(first));
                         break;
                     case SCANCODE_RIGHT:
                         first = *current;
@@ -130,13 +134,17 @@ string_t read(ushort_t len) {
                             c = *current;
                             if ((key.flags & KEY_FLAGS_CTRL) != 0 && first != '\n' &&
                                 (c == '\n' ||
-                                 isletter(c) != isletter(first) || isspace(c) != isspace(first))) {
+                                 isletter(c) != isletter(first) ||
+                                 isnumber(c) != isnumber(first) ||
+                                 isspace(c) != isspace(first))) {
                                 break;
                             }
                             ++current;
                         } while ((key.flags & KEY_FLAGS_CTRL) != 0 &&
                                  (first != '\n' || c != '\n') &&
-                                 isletter(c) == isletter(first) && isspace(c) == isspace(first));
+                                 isletter(c) == isletter(first) &&
+                                 isnumber(c) == isnumber(first) &&
+                                 isspace(c) == isspace(first));
                         break;
                     case SCANCODE_DELETE:
                         first = *current;
@@ -147,14 +155,18 @@ string_t read(ushort_t len) {
                             c = *current;
                             if ((key.flags & KEY_FLAGS_CTRL) != 0 && first != '\n' &&
                                 (c == '\n' ||
-                                 isletter(c) != isletter(first) || isspace(c) != isspace(first))) {
+                                 isletter(c) != isletter(first) ||
+                                 isnumber(c) != isnumber(first) ||
+                                 isspace(c) != isspace(first))) {
                                 break;
                             }
                             copy(current, current + 1, end - current);
                             --end;
                         } while ((key.flags & KEY_FLAGS_CTRL) != 0 &&
                                  (first != '\n' || c != '\n') &&
-                                 isletter(c) == isletter(first) && isspace(c) == isspace(first));
+                                 isletter(c) == isletter(first) &&
+                                 isnumber(c) == isnumber(first) &&
+                                 isspace(c) == isspace(first));
                         break;
                     case SCANCODE_LEFT:
                         if (current == buffer) {
@@ -168,13 +180,17 @@ string_t read(ushort_t len) {
                             c = *(current - 1);
                             if ((key.flags & KEY_FLAGS_CTRL) != 0 && first != '\n' &&
                                 (c == '\n' ||
-                                 isletter(c) != isletter(first) || isspace(c) != isspace(first))) {
+                                 isletter(c) != isletter(first) ||
+                                 isnumber(c) != isnumber(first) ||
+                                 isspace(c) != isspace(first))) {
                                 break;
                             }
                             --current;
                         } while ((key.flags & KEY_FLAGS_CTRL) != 0 &&
                                  (first != '\n' || c != '\n') &&
-                                 isletter(c) == isletter(first) && isspace(c) == isspace(first));
+                                 isletter(c) == isletter(first) &&
+                                 isnumber(c) == isnumber(first) &&
+                                 isspace(c) == isspace(first));
                         break;
                     case SCANCODE_UP:
                         if (VGA.row == 0 || (key.flags & KEY_FLAGS_CTRL) != 0) {
@@ -279,13 +295,13 @@ string_t read(ushort_t len) {
             VGA.column = startcol;
             VGA.row = startrow;
             print(buffer);
-            if (start > VGA.column + VGA.row * VGA_WIDTH) {
+            if (start > VGA_POS) {
                 clear();
                 startcol = 0;
                 startrow = 0;
                 print(buffer);
             }
-            size = min((VGA.column + VGA.row * VGA_WIDTH) - (startcol + startrow * VGA_WIDTH), VGA_SIZE);
+            size = min(VGA_POS - (startcol + startrow * VGA_WIDTH), VGA_SIZE);
             VGA.column = startcol;
             VGA.row = startrow;
             uint_t count = current - buffer;
@@ -315,7 +331,7 @@ string_t read(ushort_t len) {
             byte_t fg = VGA.color & 15;
             byte_t bg = (VGA.color >> 4) & 15;
             VGA.color = VGA_COLOR(bg, fg);
-            VGA.array[VGA.column + VGA.row * VGA_WIDTH].color = VGA.color;
+            VGA.array[VGA_POS].color = VGA.color;
             blinking = !blinking;
             blinktime = time() + 500;
         }
