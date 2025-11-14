@@ -30,14 +30,14 @@ void invoke(uint_t index, void *args) {
 
 /**
  * Sets a coroutine callback to be invoked after the given number of milliseconds.
- * Returns a handle for the coroutine.
+ * Returns a handle for the scheduled coroutine.
  */
-uint_t coro(uint_t ms, void (*coroutine)(void *), void *args) {
+handle_t coro(uint_t ms, void (*coroutine)(void *), void *args) {
     assert(coroutine != NULL, "coro() - coroutine was NULL!");
     uint_t schedule = time() + ms;
     cli();
     volatile coroutine_t *coro = NULL;
-    uint_t handle;
+    handle_t handle;
     for (uint_t i = 0; i < MAX_COROUTINES; ++i) {
         if (coroutines[i].handle % MAX_COROUTINES != i) {
             coroutines[i].handle = i;
@@ -56,8 +56,8 @@ uint_t coro(uint_t ms, void (*coroutine)(void *), void *args) {
     return handle;
 }
 
-/** Attempts to cancel the coroutine with the given handle. */
-bool_t cancel(uint_t handle) {
+/** Attempts to cancel the scheduled coroutine with the given handle. */
+bool_t cancel(handle_t handle) {
     cli();
     volatile coroutine_t *coro = &coroutines[handle % MAX_COROUTINES];
     bool_t result;
