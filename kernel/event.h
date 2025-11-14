@@ -52,7 +52,7 @@ void invoke(uint_t index, void *args);
  */
 handle_t coro(uint_t ms, void (*coroutine)(void *), void *args);
 
-/** Attempts to cancel the coroutine with the given handle. */
+/** Attempts to cancel the scheduled coroutine with the given handle. */
 bool_t cancel(handle_t handle);
 
 /** Processes coroutines. */
