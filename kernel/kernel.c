@@ -68,10 +68,10 @@ void kernel_main() {
     color(VGA_COLOR_GREEN, VGA_COLOR_BLACK); // Matrix style
     char_t *start = (char_t *) "int main() {\n\treturn 0;\n}\n";
     while (true) {
-        start = (char_t *) read(VGA_SIZE - VGA_POS, start);
-        strpush(start, '\n');
         VGA.column = 0;
-        VGA.row = 1;
+        VGA.row = 2;
+        start = (char_t *) read(VGA_SIZE - VGA_POS, true, start);
+        strpush(start, '\n');
     }
 
     shutdown(1000);

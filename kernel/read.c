@@ -45,7 +45,7 @@ volatile keyboard_t keyboard = {0};
  * The maximum string length is min(<len>, MAX_INPUT_LEN).
  * The returned string is reused for all conversions.
  */
-string_t read(ushort_t len, string_t start) {
+string_t read(ushort_t len, bool_t ctrl_chars, string_t start) {
     static char_t buffer[MAX_INPUT_LEN] = {0};
     char_t *current = buffer;
     char_t *end = buffer;
@@ -77,6 +77,8 @@ string_t read(ushort_t len, string_t start) {
             if (c != '\0') {
                 if (c == '\n' && (key.flags & KEY_FLAGS_SHIFT) == 0) {
                     break;
+                } else if (!ctrl_chars && (c == '\t' || c == '\n')) {
+                    continue;
                 }
                 uint_t app;
                 switch (c) {
@@ -366,7 +368,7 @@ char_t readchar() {
  * Returns whether the read was successful.
  */
 bool_t readint(int_t *num) {
-    return strint(read(12, NULL), num);
+    return strint(read(12, false, NULL), num);
 }
 
 /**
